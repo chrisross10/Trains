@@ -14,6 +14,9 @@ namespace Trains
 
         public TravelResult Travel(string journey)
         {
+            if (string.IsNullOrEmpty(journey))
+                return new TravelResult(null);
+
             var totalDistance = Distance.FromMiles(0);
             var route = SplitRoute(journey);
             foreach (var r in route)
