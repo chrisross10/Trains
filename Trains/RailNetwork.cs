@@ -69,7 +69,7 @@ namespace Trains
             string end = journey[1].ToString();
             int maxTrips = int.Parse(journey[2].ToString());
             int numberOfTrips = 0;
-            int counter=0;
+            int counter = 0;
 
             return TripsRecursive(start, end, numberOfTrips, maxTrips, ref counter);
         }
@@ -77,6 +77,40 @@ namespace Trains
         private List<string> GetAllTripsThatStartWith(string start)
         {
             return _map.Keys.Where(k => k.StartsWith(start)).ToList();
+        }
+
+
+
+
+
+        public int TripsExact(string journey)
+        {
+            string start = journey[0].ToString();
+            string end = journey[1].ToString();
+            int exactTrips = int.Parse(journey[2].ToString());
+            int numberOfRoutes = 0;
+            int counter = 0;
+
+            return ExactTripsRecursive(start, end, numberOfRoutes, exactTrips, ref counter);
+        }
+
+        public int ExactTripsRecursive(string start, string end, int numberOfRoutes, int exactTrips, ref int counter)
+        {
+            var startTrips = GetAllTripsThatStartWith(start);
+            numberOfRoutes++;
+            foreach (var trip in startTrips)
+            {
+                if (numberOfRoutes > exactTrips)
+                {
+                    break;
+                }
+                if (numberOfRoutes == exactTrips && trip.EndsWith(end))
+                {
+                    counter++;
+                }
+                ExactTripsRecursive(trip[1].ToString(), end, numberOfRoutes, exactTrips, ref counter);
+            }
+            return counter;
         }
     }
 }
