@@ -12,11 +12,22 @@ namespace Trains
             _map = map;
         }
 
-        public Distance Travel(string journey)
+        public TravelResult Travel(string journey)
         {
             var totalDistance = Distance.FromMiles(0);
             var route = SplitRoute(journey);
-            return route.Aggregate(totalDistance, (current, r) => current.Add(_map[r]));
+            foreach (var r in route)
+            {
+                if (_map.ContainsKey(r))
+                {
+                    totalDistance = totalDistance.Add(_map[r]);
+                }
+                else
+                {
+                    return new TravelResult(null);
+                }
+            }
+            return new TravelResult(totalDistance);
         }
 
         private IEnumerable<string> SplitRoute(string journey)

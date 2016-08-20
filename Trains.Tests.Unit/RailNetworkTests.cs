@@ -7,12 +7,12 @@ namespace Trains.Tests.Unit
     [TestFixture]
     public class RailNetworkTests
     {
-        [TestCase("ABC", ExpectedResult = 9)]
-        [TestCase("AD", ExpectedResult = 5)]
-        [TestCase("ADC", ExpectedResult = 13)]
-        [TestCase("AEBCD", ExpectedResult = 22)]
-        //[TestCase("AED", ExpectedResult = "NO SUCH ROUTE")]
-        public int It_calculates_the_distance_of_the_journey(string journey)
+        [TestCase("ABC", ExpectedResult = "9")]
+        [TestCase("AD", ExpectedResult = "5")]
+        [TestCase("ADC", ExpectedResult = "13")]
+        [TestCase("AEBCD", ExpectedResult = "22")]
+        [TestCase("AED", ExpectedResult = "NO SUCH ROUTE")]
+        public string It_calculates_the_distance_of_the_journey(string journey)
         {
             var map = new Dictionary<string, Distance>
             {
@@ -27,7 +27,7 @@ namespace Trains.Tests.Unit
                 {"EB", Distance.FromMiles(3)},
             };
             var network = new RailNetwork(map);
-            return network.Travel(journey).Miles;
+            return network.Travel(journey).Result;
         }
     }
 }
