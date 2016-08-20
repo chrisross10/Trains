@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace Trains.Tests.Unit
 {
     [TestFixture]
-    public class RailNetworkTests
+    public class RailNetwork_TravelTests
     {
         [TestCase("ABC", ExpectedResult = "9")]
         [TestCase("AD", ExpectedResult = "5")]
