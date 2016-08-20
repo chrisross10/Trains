@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using NUnit.Framework;
 
 namespace Trains.Tests.Unit
 {
     [TestFixture]
-    public class RailNetwork_TravelTests
+    public class RailNetwork_NumberOfTripsTests
     {
         private Dictionary<string, Distance> _map;
         private RailNetwork _network;
@@ -28,15 +27,15 @@ namespace Trains.Tests.Unit
             _network = new RailNetwork(_map);
         }
 
-        [TestCase("ABC", ExpectedResult = "9")]
-        [TestCase("AD", ExpectedResult = "5")]
-        [TestCase("ADC", ExpectedResult = "13")]
-        [TestCase("AEBCD", ExpectedResult = "22")]
-        [TestCase("AED", ExpectedResult = "NO SUCH ROUTE")]
-        [TestCase("", ExpectedResult = "NO SUCH ROUTE")]
-        public string It_calculates_the_distance_of_the_journey(string journey)
+        [TestCase("CC3", ExpectedResult = 2)]
+        [TestCase("CC4", ExpectedResult = 4)]
+        [TestCase("CC5", ExpectedResult = 6)]
+        [TestCase("AB3", ExpectedResult = 3)]
+        //[TestCase("AB4", ExpectedResult = 6)]
+        [TestCase("AB5", ExpectedResult = 8)]
+        public int It_calculates_the_distance_of_the_journey(string journey)
         {
-            return _network.Travel(journey).Result;
+            return _network.Trips(journey);
         }
     }
 }
