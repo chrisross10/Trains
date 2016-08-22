@@ -13,5 +13,7 @@
         {
             get { return _distance != null ? _distance.Miles.ToString() : "NO SUCH ROUTE"; }
         }
+
+        public Distance Distance { get {return _distance;} }
     }
 }

@@ -7,74 +7,65 @@ namespace Trains
     public class JourneyPlanner
     {
         private readonly IMapRepository _mapRepository;
+        private readonly IRouteDistance _routeDistance;
 
-        public JourneyPlanner(IMapRepository mapRepository)
+        public JourneyPlanner(IMapRepository mapRepository, IRouteDistance routeDistance)
         {
             _mapRepository = mapRepository;
+            _routeDistance = routeDistance;
         }
 
-        public Distance ShortestRoute(string route)
+        public TravelResult ShortestRoute(string route)
         {
             var start = route[0].ToString();
             var end = route[1].ToString();
             var allRoutes = new List<string>();
-            var sb = new StringBuilder();
-            sb.Append(start);
+            var currentRoute = new List<string>();
 
-            var shortestRouteRecursive = ShortestRouteRecursive(start, end, ref allRoutes, ref sb);
-            foreach (var routes in shortestRouteRecursive)
+            var shortestRouteRecursive = ShortestRouteRecursive(start, end, ref allRoutes, ref currentRoute);
+            if (shortestRouteRecursive.Count == 0)
             {
-
+                return new TravelResult(null);
             }
-            return null;
+            var journey = shortestRouteRecursive.ToDictionary(r => r, r => _routeDistance.Travel(r).Distance);
+            var distance = journey.OrderBy(d => d.Value.Miles).First().Value;
+            return new TravelResult(distance);
         }
 
-        private List<string> ShortestRouteRecursive(string start, string end, ref List<string> allRoutes, ref StringBuilder sb)
+        private List<string> ShortestRouteRecursive(string start, string end, ref List<string> allRoutes, ref List<string> currentRoute)
         {
             var startTrips = _mapRepository.GetAllTripsThatStartWith(start);
             foreach (var trip in startTrips)
             {
-                sb.Append(trip[1]);
+                if (currentRoute.Contains(trip))
+                {
+                    continue;
+                }
+                currentRoute.Add(trip);
                 if (trip.EndsWith(end))
                 {
-                    allRoutes.Add(sb.ToString());
-                    var firstChar = sb[0];
-                    sb.Clear();
-                    sb.Append(firstChar);
-                    break;
+                    allRoutes.Add(FlattenRoute(currentRoute));
+                    currentRoute.RemoveAt(currentRoute.Count - 1);
+                    continue;
                 }
-                ShortestRouteRecursive(trip[1].ToString(), end, ref allRoutes, ref sb);
+                ShortestRouteRecursive(trip[1].ToString(), end, ref allRoutes, ref currentRoute);
+                currentRoute.RemoveAt(currentRoute.Count - 1);
             }
             return allRoutes;
         }
 
-        //public Distance ShortestRoute(string route)
-        //{
-        //    var start = route[0].ToString();
-        //    var end = route[1].ToString();
-        //    var distance = Distance.FromMiles(0);
-
-        //    return ShortestRouteRecursive(start, end, ref distance);
-        //}
-
-        //public Distance ShortestRouteRecursive(string start, string end, ref Distance distance)
-        //{
-        //    var startTrips = GetAllTripsThatStartWith(start);
-        //    foreach (var trip in startTrips)
-        //    {
-        //        distance = distance.Add(_map[trip]);
-        //        if (distance.Miles > 30)
-        //        {
-        //            break;
-        //        }
-        //        if (trip.EndsWith(end))
-        //        {
-        //            distance.Add(_map[trip]);
-        //        }
-        //        ShortestRouteRecursive(trip[1].ToString(), end, ref distance);
-        //    }
-        //    return distance;
-        //}
+        private string FlattenRoute(List<string> currentRoute)
+        {
+            var sb = new StringBuilder();
+            for (int i = 0; i < currentRoute.Count; i++)
+            {
+                if (i == currentRoute.Count - 1)
+                    sb.Append(currentRoute[i]);
+                else
+                    sb.Append(currentRoute[i].First());
+            }
+            return sb.ToString();
+        }
 
     }
 }

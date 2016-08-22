@@ -11,13 +11,17 @@ namespace Trains.Tests.Unit
         public void SetUp()
         {
             //TODO: mock the repo
-            _planner = new JourneyPlanner(new MapRespository());
+            _planner = new JourneyPlanner(new MapRespository(),new RouteDistance(new MapRespository()));
         }
 
-        [Test, Ignore("WIP")]
-        public void It_finds_shortest_route()
+        [TestCase("AC", ExpectedResult = "9")]
+        [TestCase("CC", ExpectedResult = "9")]
+        [TestCase("BB", ExpectedResult = "9")]
+        [TestCase("AD", ExpectedResult = "5")]
+        [TestCase("CA", ExpectedResult = "NO SUCH ROUTE")]
+        public string It_finds_shortest_route(string route)
         {
-            Assert.That(_planner.ShortestRoute("AC").Miles, Is.EqualTo(9));
+            return _planner.ShortestRoute(route).Result;
         }
     }
 }
