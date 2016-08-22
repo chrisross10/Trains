@@ -3,18 +3,18 @@
     public class RailNetwork
     {
         private readonly IMapRepository _mapRepository;
-        private readonly IRouteDistance _routeDistance;
+        private readonly IDistanceCalculator _distanceCalculator;
 
         //TODO: eventually, the mapRepo will move out of this class
-        public RailNetwork(IMapRepository mapRepository, IRouteDistance routeDistance)
+        public RailNetwork(IMapRepository mapRepository, IDistanceCalculator distanceCalculator)
         {
             _mapRepository = mapRepository;
-            _routeDistance = routeDistance;
+            _distanceCalculator = distanceCalculator;
         }
 
         public TravelResult Travel(string journey)
         {
-            return _routeDistance.Travel(journey);
+            return _distanceCalculator.DistanceTravelled(journey);
         }
 
 

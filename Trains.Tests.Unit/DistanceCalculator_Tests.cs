@@ -3,14 +3,14 @@
 namespace Trains.Tests.Unit
 {
     [TestFixture]
-    public class RailNetwork_TravelTests
+    public class DistanceCalculator_Tests
     {
-        private RailNetwork _network;
+        private DistanceCalculator _calc;
 
         [SetUp]
         public void SetUp()
         {
-            _network = new RailNetwork(new MapRespository(), new RouteDistance(new MapRespository()));
+            _calc = new DistanceCalculator(new MapRespository());
         }
 
         [TestCase("ABC", ExpectedResult = "9")]
@@ -19,9 +19,10 @@ namespace Trains.Tests.Unit
         [TestCase("AEBCD", ExpectedResult = "22")]
         [TestCase("AED", ExpectedResult = "NO SUCH ROUTE")]
         [TestCase("", ExpectedResult = "NO SUCH ROUTE")]
+        //[TestCase("*", ExpectedResult = "NO SUCH ROUTE")]
         public string It_calculates_the_distance_of_the_journey(string journey)
         {
-            return _network.Travel(journey).Result;
+            return _calc.DistanceTravelled(journey).Result;
         }
     }
 }

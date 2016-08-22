@@ -2,16 +2,16 @@ using System.Collections.Generic;
 
 namespace Trains
 {
-    public class RouteDistance : IRouteDistance
+    public class DistanceCalculator : IDistanceCalculator
     {
         private readonly IMapRepository _mapRepository;
 
-        public RouteDistance(IMapRepository mapRepository)
+        public DistanceCalculator(IMapRepository mapRepository)
         {
             _mapRepository = mapRepository;
         }
 
-        public TravelResult Travel(string journey)
+        public TravelResult DistanceTravelled(string journey)
         {
             if (string.IsNullOrEmpty(journey))
                 return new TravelResult(null);
