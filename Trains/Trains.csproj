@@ -41,8 +41,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Distance.cs" />
+    <Compile Include="IMapRepository.cs" />
+    <Compile Include="IRouteDistance.cs" />
+    <Compile Include="JourneyPlanner.cs" />
+    <Compile Include="MapRespository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RailNetwork.cs" />
+    <Compile Include="RouteDistance.cs" />
     <Compile Include="TravelResult.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

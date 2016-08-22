@@ -1,52 +1,27 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-
-namespace Trains
+﻿namespace Trains
 {
     public class RailNetwork
     {
-        private readonly Dictionary<string, Distance> _map;
+        private readonly IMapRepository _mapRepository;
+        private readonly IRouteDistance _routeDistance;
 
-        public RailNetwork(Dictionary<string, Distance> map)
+        //TODO: eventually, the mapRepo will move out of this class
+        public RailNetwork(IMapRepository mapRepository, IRouteDistance routeDistance)
         {
-            _map = map;
+            _mapRepository = mapRepository;
+            _routeDistance = routeDistance;
         }
 
         public TravelResult Travel(string journey)
         {
-            if (string.IsNullOrEmpty(journey))
-                return new TravelResult(null);
-
-            var totalDistance = Distance.FromMiles(0);
-            var route = SplitRoute(journey);
-            foreach (var r in route)
-            {
-                if (_map.ContainsKey(r))
-                {
-                    totalDistance = totalDistance.Add(_map[r]);
-                }
-                else
-                {
-                    return new TravelResult(null);
-                }
-            }
-            return new TravelResult(totalDistance);
+            return _routeDistance.Travel(journey);
         }
 
-        private IEnumerable<string> SplitRoute(string journey)
-        {
-            var route = new List<string>();
-            for (int i = 1; i < journey.Length; i++)
-            {
-                route.Add(string.Format("{0}{1}", journey[i - 1], journey[i]));
-            }
-            return route;
-        }
+
 
         public int TripsRecursive(string start, string end, int numberOfTrips, int maxTrips, ref int counter)
         {
-            var startTrips = GetAllTripsThatStartWith(start);
+            var startTrips = _mapRepository.GetAllTripsThatStartWith(start);
             numberOfTrips++;
             foreach (var trip in startTrips)
             {
@@ -74,14 +49,7 @@ namespace Trains
             return TripsRecursive(start, end, numberOfTrips, maxTrips, ref counter);
         }
 
-        private List<string> GetAllTripsThatStartWith(string start)
-        {
-            return _map.Keys.Where(k => k.StartsWith(start)).ToList();
-        }
-
-
-
-
+        
 
         public int TripsExact(string journey)
         {
@@ -96,7 +64,7 @@ namespace Trains
 
         public int ExactTripsRecursive(string start, string end, int numberOfRoutes, int exactTrips, ref int counter)
         {
-            var startTrips = GetAllTripsThatStartWith(start);
+            var startTrips = _mapRepository.GetAllTripsThatStartWith(start);
             numberOfRoutes++;
             foreach (var trip in startTrips)
             {
@@ -112,5 +80,7 @@ namespace Trains
             }
             return counter;
         }
+
+
     }
 }
