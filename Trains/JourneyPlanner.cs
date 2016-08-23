@@ -4,7 +4,12 @@ using System.Text;
 
 namespace Trains
 {
-    public class JourneyPlanner
+    public interface IJourneyPlanner
+    {
+        List<string> AllRoutes(string start, string end, ref List<string> allRoutes, ref List<string> currentRoute);
+    }
+
+    public class JourneyPlanner : IJourneyPlanner
     {
         private readonly IMapRepository _mapRepository;
         private readonly IDistanceCalculator _distanceCalculator;
@@ -15,24 +20,7 @@ namespace Trains
             _distanceCalculator = distanceCalculator;
         }
 
-        public TravelResult Shortest(string route)
-        {
-            var start = route[0].ToString();
-            var end = route[1].ToString();
-            var allRoutes = new List<string>();
-            var currentRoute = new List<string>();
-
-            var shortestRouteRecursive = ShortestRouteRecursive(start, end, ref allRoutes, ref currentRoute);
-            if (shortestRouteRecursive.Count == 0)
-            {
-                return new TravelResult(null);
-            }
-            var journey = shortestRouteRecursive.ToDictionary(r => r, r => _distanceCalculator.DistanceTravelled(r).Distance);
-            var distance = journey.OrderBy(d => d.Value.Miles).First().Value;
-            return new TravelResult(distance);
-        }
-
-        private List<string> ShortestRouteRecursive(string start, string end, ref List<string> allRoutes, ref List<string> currentRoute)
+        public List<string> AllRoutes(string start, string end, ref List<string> allRoutes, ref List<string> currentRoute)
         {
             var startTrips = _mapRepository.GetAllTripsThatStartWith(start);
             foreach (var trip in startTrips)
@@ -48,10 +36,27 @@ namespace Trains
                     currentRoute.RemoveAt(currentRoute.Count - 1);
                     continue;
                 }
-                ShortestRouteRecursive(trip[1].ToString(), end, ref allRoutes, ref currentRoute);
+                AllRoutes(trip[1].ToString(), end, ref allRoutes, ref currentRoute);
                 currentRoute.RemoveAt(currentRoute.Count - 1);
             }
             return allRoutes;
+        }
+
+        public TravelResult Shortest(string route)
+        {
+            var start = route[0].ToString();
+            var end = route[1].ToString();
+            var allRoutes = new List<string>();
+            var currentRoute = new List<string>();
+
+            var shortestRouteRecursive = AllRoutes(start, end, ref allRoutes, ref currentRoute);
+            if (shortestRouteRecursive.Count == 0)
+            {
+                return new TravelResult(null);
+            }
+            var journey = shortestRouteRecursive.ToDictionary(r => r, r => _distanceCalculator.DistanceTravelled(r).Distance);
+            var distance = journey.OrderBy(d => d.Value.Miles).First().Value;
+            return new TravelResult(distance);
         }
 
         public string AllRoutesWithin(string journey, int maxDistance)
