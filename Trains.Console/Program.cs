@@ -27,8 +27,7 @@ namespace Trains.App
             return new RailNetwork(
                  new DistanceCalculator(mapRespository),
                  new StationTracker(mapRespository),
-                 new JourneyPlanner(mapRespository,
-                     new DistanceCalculator(mapRespository)
+                 new JourneyPlanner(mapRespository
                      )
                  );
         }

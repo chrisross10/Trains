@@ -27,7 +27,7 @@ namespace Trains.Tests.Unit
             };
             mapRepository.Map().Returns(map);
             var distanceCalculator = Substitute.For<IDistanceCalculator>();
-            _planner = new JourneyPlanner(mapRepository, distanceCalculator);
+            _planner = new JourneyPlanner(mapRepository);
         }
 
         [TestCase("AC", ExpectedResult = "9")]
@@ -64,7 +64,7 @@ namespace Trains.Tests.Unit
             };
             mapRepository.Map().Returns(map);
             var distanceCalculator = Substitute.For<IDistanceCalculator>();
-            _planner = new JourneyPlanner(mapRepository, distanceCalculator);
+            _planner = new JourneyPlanner(mapRepository);
         }
 
         [TestCase("CC", 30, ExpectedResult = "7")]
