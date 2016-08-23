@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -5,43 +6,19 @@ namespace Trains
 {
     public class MapRespository : IMapRepository
     {
-        private readonly string _filePath;
+        private readonly string _graph;
+        private List<Route> _map;
 
-        public MapRespository(string filePath)
+        public MapRespository(string graph)
         {
-            _filePath = filePath;
+            _graph = graph;
         }
-
-        //public Dictionary<string, Distance> Map()
-        //{
-        //    return new Dictionary<string, Distance>
-        //    {
-        //        {"AB", Distance.FromMiles(5)},
-        //        {"AD", Distance.FromMiles(5)},
-        //        {"AE", Distance.FromMiles(7)},
-        //        {"BC", Distance.FromMiles(4)},
-        //        {"CD", Distance.FromMiles(8)},
-        //        {"CE", Distance.FromMiles(2)},
-        //        {"DC", Distance.FromMiles(8)},
-        //        {"DE", Distance.FromMiles(6)},
-        //        {"EB", Distance.FromMiles(3)},
-        //    };
-        //}
 
         public List<Route> Map()
         {
-            return new List<Route>
-            {
-                new Route("A","B",Distance.FromMiles(5)),
-                new Route("A","D",Distance.FromMiles(5)),
-                new Route("A","E",Distance.FromMiles(7)),
-                new Route("B","C",Distance.FromMiles(4)),
-                new Route("C","D",Distance.FromMiles(8)),
-                new Route("C","E",Distance.FromMiles(2)),
-                new Route("D","C",Distance.FromMiles(8)),
-                new Route("D","E",Distance.FromMiles(6)),
-                new Route("E","B",Distance.FromMiles(3)),
-            };
+            return _map ?? _graph.Replace(" ", string.Empty).Split(',').Select(route => new Route(route[0].ToString(),
+                route[1].ToString(),
+                Distance.FromMiles(int.Parse(route[2].ToString())))).ToList();
         }
     }
 }
