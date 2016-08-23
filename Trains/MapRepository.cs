@@ -1,17 +1,18 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace Trains
 {
-    public class MapRespository : IMapRepository
+    public class MapRepository : IMapRepository
     {
-        private readonly string _graph;
         private List<Route> _map;
+        private readonly string _graph;
 
-        public MapRespository(string graph)
+        public MapRepository(string filePath)
         {
-            _graph = graph;
+            _graph = File.ReadAllText(filePath);
         }
 
         public List<Route> Map()

@@ -15,8 +15,7 @@ namespace Trains.App
                 Console.Write("File does not exist. Please make sure you point to the correct location");
             }
 
-            var graph = File.ReadAllText(filePath);
-            var railNetwork = Bootstrap(graph);
+            var railNetwork = Bootstrap(filePath);
 
             var command = args[1];
             var query = args[2];
@@ -53,9 +52,9 @@ namespace Trains.App
             }
         }
 
-        private static RailNetwork Bootstrap(string graph)
+        private static RailNetwork Bootstrap(string filePath)
         {
-            var mapRespository = new MapRespository(graph);
+            var mapRespository = new MapRepository(filePath);
             return new RailNetwork(
                  new DistanceCalculator(mapRespository),
                  new StationTracker(mapRespository),
