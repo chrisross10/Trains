@@ -18,7 +18,7 @@ namespace Trains
             var start = route[0].ToString();
             var end = route[1].ToString();
             var allRoutes = new List<KeyValuePair<string, Distance>>();
-            var currentRoute = new List<KeyValuePair<string, Distance>>();
+            var currentRoute = new Journey();
 
             var shortestRouteRecursive = AllRoutes(start, end, ref allRoutes, ref currentRoute);
             if (shortestRouteRecursive.Count == 0)
@@ -30,7 +30,7 @@ namespace Trains
             return new TravelResult(distance);
         }
 
-        private List<KeyValuePair<string, Distance>> AllRoutes(string start, string end, ref List<KeyValuePair<string, Distance>> allRoutes, ref List<KeyValuePair<string, Distance>> currentRoute)
+        private List<KeyValuePair<string, Distance>> AllRoutes(string start, string end, ref List<KeyValuePair<string, Distance>> allRoutes, ref Journey currentRoute)
         {
             var startTrips = GetAllTripsThatStartWith(start);
             foreach (var trip in startTrips)
@@ -40,14 +40,14 @@ namespace Trains
                     continue;
                 }
                 currentRoute.Add(trip);
-                if (trip.Key.EndsWith(end))
+                if (trip.End.Equals(end))
                 {
                     allRoutes.Add(FlattenRoute(currentRoute));
-                    currentRoute.RemoveAt(currentRoute.Count - 1);
+                    currentRoute.RemovePrevious();
                     continue;
                 }
-                AllRoutes(trip.Key[1].ToString(), end, ref allRoutes, ref currentRoute);
-                currentRoute.RemoveAt(currentRoute.Count - 1);
+                AllRoutes(trip.End, end, ref allRoutes, ref currentRoute);
+                currentRoute.RemovePrevious();
             }
             return allRoutes;
         }
@@ -57,52 +57,52 @@ namespace Trains
             var start = journey[0].ToString();
             var end = journey[1].ToString();
             var allRoutes = new List<KeyValuePair<string, Distance>>();
-            var currentRoute = new List<KeyValuePair<string, Distance>>();
+            var currentRoute = new Journey();
 
             var routes = AllRoutesWithinRecursive(start, end, maxDistance, ref allRoutes, ref currentRoute);
             return routes.Count.ToString();
         }
 
         private List<KeyValuePair<string, Distance>> AllRoutesWithinRecursive(string start, string end, int maxDistance, ref List<KeyValuePair<string, Distance>> allRoutes,
-            ref List<KeyValuePair<string, Distance>> currentRoute)
+            ref Journey currentRoute)
         {
             var startTrips = GetAllTripsThatStartWith(start);
             foreach (var trip in startTrips)
             {
                 currentRoute.Add(trip);
-                if (currentRoute.Sum(r=>r.Value.Miles) >= maxDistance)
+                if (currentRoute.Sum(r => r.Distance.Miles) >= maxDistance)
                 {
-                    currentRoute.RemoveAt((currentRoute.Count - 1));
+                    currentRoute.RemovePrevious();
                     continue;
                 }
-                if (trip.Key.EndsWith(end))
+                if (trip.End.Equals(end))
                 {
                     allRoutes.Add(FlattenRoute(currentRoute));
                 }
-                AllRoutesWithinRecursive(trip.Key[1].ToString(), end, maxDistance, ref allRoutes, ref currentRoute);
-                currentRoute.RemoveAt((currentRoute.Count - 1));
+                AllRoutesWithinRecursive(trip.End, end, maxDistance, ref allRoutes, ref currentRoute);
+                currentRoute.RemovePrevious();
             }
             return allRoutes;
         }
 
-        private KeyValuePair<string, Distance> FlattenRoute(List<KeyValuePair<string, Distance>> currentRoute)
+        private KeyValuePair<string, Distance> FlattenRoute(Journey currentRoute)
         {
             var sb = new StringBuilder();
             var totalDistance = Distance.FromMiles(0);
-            for (int i = 0; i < currentRoute.Count; i++)
+            for (int i = 0; i < currentRoute.Routes.Count; i++)
             {
-                totalDistance = totalDistance.Add(currentRoute[i].Value);
-                if (i == currentRoute.Count - 1)
-                    sb.Append(currentRoute[i].Key);
+                totalDistance = totalDistance.Add(currentRoute.Routes[i].Distance);
+                if (i == currentRoute.Routes.Count - 1)
+                    sb.Append(currentRoute.Routes[i].Start + currentRoute.Routes[i].End);
                 else
-                    sb.Append(currentRoute[i].Key.First());
+                    sb.Append(currentRoute.Routes[i].Start);
             }
-            return new KeyValuePair<string, Distance>(sb.ToString(),totalDistance);
+            return new KeyValuePair<string, Distance>(sb.ToString(), totalDistance);
         }
 
-        private List<KeyValuePair<string, Distance>> GetAllTripsThatStartWith(string start)
+        private List<Route> GetAllTripsThatStartWith(string start)
         {
-            return _mapRepository.Map().Where(k => k.Key.StartsWith(start)).ToList();
+            return _mapRepository.Map().Where(k => k.Start.Equals(start)).ToList();
         }
     }
 }

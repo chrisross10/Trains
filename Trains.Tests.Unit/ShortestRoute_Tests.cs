@@ -13,17 +13,17 @@ namespace Trains.Tests.Unit
         public void SetUp()
         {
             var mapRepository = Substitute.For<IMapRepository>();
-            var map = new Dictionary<string, Distance>
+            var map = new List<Route>
             {
-                {"AB", Distance.FromMiles(5)},
-                {"AD", Distance.FromMiles(5)},
-                {"AE", Distance.FromMiles(7)},
-                {"BC", Distance.FromMiles(4)},
-                {"CD", Distance.FromMiles(8)},
-                {"CE", Distance.FromMiles(2)},
-                {"DC", Distance.FromMiles(8)},
-                {"DE", Distance.FromMiles(6)},
-                {"EB", Distance.FromMiles(3)},
+                new Route("A","B",Distance.FromMiles(5)),
+                new Route("A","D",Distance.FromMiles(5)),
+                new Route("A","E",Distance.FromMiles(7)),
+                new Route("B","C",Distance.FromMiles(4)),
+                new Route("C","D",Distance.FromMiles(8)),
+                new Route("C","E",Distance.FromMiles(2)),
+                new Route("D","C",Distance.FromMiles(8)),
+                new Route("D","E",Distance.FromMiles(6)),
+                new Route("E","B",Distance.FromMiles(3)),
             };
             mapRepository.Map().Returns(map);
             var distanceCalculator = Substitute.For<IDistanceCalculator>();
@@ -50,20 +50,19 @@ namespace Trains.Tests.Unit
         public void SetUp()
         {
             var mapRepository = Substitute.For<IMapRepository>();
-            var map = new Dictionary<string, Distance>
+            var map = new List<Route>
             {
-                {"AB", Distance.FromMiles(5)},
-                {"AD", Distance.FromMiles(5)},
-                {"AE", Distance.FromMiles(7)},
-                {"BC", Distance.FromMiles(4)},
-                {"CD", Distance.FromMiles(8)},
-                {"CE", Distance.FromMiles(2)},
-                {"DC", Distance.FromMiles(8)},
-                {"DE", Distance.FromMiles(6)},
-                {"EB", Distance.FromMiles(3)},
+                new Route("A","B",Distance.FromMiles(5)),
+                new Route("A","D",Distance.FromMiles(5)),
+                new Route("A","E",Distance.FromMiles(7)),
+                new Route("B","C",Distance.FromMiles(4)),
+                new Route("C","D",Distance.FromMiles(8)),
+                new Route("C","E",Distance.FromMiles(2)),
+                new Route("D","C",Distance.FromMiles(8)),
+                new Route("D","E",Distance.FromMiles(6)),
+                new Route("E","B",Distance.FromMiles(3)),
             };
             mapRepository.Map().Returns(map);
-            var distanceCalculator = Substitute.For<IDistanceCalculator>();
             _planner = new JourneyPlanner(mapRepository);
         }
 

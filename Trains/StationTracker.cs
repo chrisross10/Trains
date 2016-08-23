@@ -33,11 +33,11 @@ namespace Trains
                 {
                     continue;
                 }
-                if (trip.EndsWith(end))
+                if (trip.End.Equals(end))
                 {
                     counter++;
                 }
-                TripsRecursive(trip[1].ToString(), end, numberOfTrips, maxTrips, ref counter);
+                TripsRecursive(trip.End, end, numberOfTrips, maxTrips, ref counter);
             }
             return counter;
         }
@@ -63,18 +63,18 @@ namespace Trains
                 {
                     continue;
                 }
-                if (numberOfRoutes == exactTrips && trip.EndsWith(end))
+                if (numberOfRoutes == exactTrips && trip.End.Equals(end))
                 {
                     counter++;
                 }
-                ExactTripsRecursive(trip[1].ToString(), end, numberOfRoutes, exactTrips, ref counter);
+                ExactTripsRecursive(trip.End, end, numberOfRoutes, exactTrips, ref counter);
             }
             return counter;
         }
 
-        private List<string> GetAllTripsThatStartWith(string start)
+        private List<Route> GetAllTripsThatStartWith(string start)
         {
-            return _mapRepository.Map().Keys.Where(k => k.StartsWith(start)).ToList();
+            return _mapRepository.Map().Where(r => r.Start.Equals(start)).ToList();
         }
     }
 }

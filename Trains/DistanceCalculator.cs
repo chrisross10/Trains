@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Trains
 {
@@ -16,13 +17,14 @@ namespace Trains
             if (string.IsNullOrEmpty(journey))
                 return new TravelResult(null);
 
+            var map = _mapRepository.Map();
             var totalDistance = Distance.FromMiles(0);
-            var route = SplitRoute(journey);
-            foreach (var r in route)
+            for (int i = 1; i < journey.Length; i++)
             {
-                if (_mapRepository.Map().ContainsKey(r))
+                var route = map.SingleOrDefault(m => m.Start.Equals(journey[i - 1].ToString()) && m.End.Equals(journey[i].ToString()));
+                if (route != null)
                 {
-                    totalDistance = totalDistance.Add(_mapRepository.Map()[r]);
+                    totalDistance = totalDistance.Add(route.Distance);
                 }
                 else
                 {
@@ -30,16 +32,6 @@ namespace Trains
                 }
             }
             return new TravelResult(totalDistance);
-        }
-
-        private IEnumerable<string> SplitRoute(string journey)
-        {
-            var route = new List<string>();
-            for (int i = 1; i < journey.Length; i++)
-            {
-                route.Add(string.Format("{0}{1}", journey[i - 1], journey[i]));
-            }
-            return route;
         }
     }
 }

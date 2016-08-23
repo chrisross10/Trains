@@ -4,6 +4,6 @@ namespace Trains
 {
     public interface IMapRepository
     {
-        Dictionary<string, Distance> Map();
+        List<Route> Map();
     }
 }
