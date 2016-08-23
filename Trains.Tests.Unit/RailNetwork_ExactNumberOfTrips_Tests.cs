@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using NSubstitute;
 using NUnit.Framework;
 
 namespace Trains.Tests.Unit
@@ -7,11 +8,12 @@ namespace Trains.Tests.Unit
     public class RailNetwork_ExactNumberOfTrips_Tests
     {
         private Dictionary<string, Distance> _map;
-        private RailNetwork _network;
+        private StationTracker _stationTracker;
 
         [SetUp]
         public void SetUp()
         {
+            var mapRepository = Substitute.For<IMapRepository>();
             _map = new Dictionary<string, Distance>
             {
                 {"AB", Distance.FromMiles(5)},
@@ -24,7 +26,7 @@ namespace Trains.Tests.Unit
                 {"DE", Distance.FromMiles(6)},
                 {"EB", Distance.FromMiles(3)},
             };
-            _network = new RailNetwork(new DistanceCalculator(new MapRespository()), new StationTracker(new MapRespository()), new JourneyPlanner(new MapRespository(), new DistanceCalculator(new MapRespository())));
+            _stationTracker = new StationTracker(mapRepository);
         }
 
         [TestCase("AC4", ExpectedResult = 3)]
@@ -32,7 +34,7 @@ namespace Trains.Tests.Unit
         [TestCase("CC4", ExpectedResult = 2)]
         public int It_calculates_the_exact_number_of_trips(string journey)
         {
-            return _network.TripsExact(journey);
+            return _stationTracker.TripsExact(journey);
         }
     }
 }

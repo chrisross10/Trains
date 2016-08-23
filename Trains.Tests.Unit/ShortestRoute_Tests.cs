@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using NSubstitute;
 using NUnit.Framework;
 
 namespace Trains.Tests.Unit
@@ -10,8 +12,22 @@ namespace Trains.Tests.Unit
         [SetUp]
         public void SetUp()
         {
-            //TODO: mock the repo
-            _planner = new JourneyPlanner(new MapRespository(), new DistanceCalculator(new MapRespository()));
+            var mapRepository = Substitute.For<IMapRepository>();
+            var map = new Dictionary<string, Distance>
+            {
+                {"AB", Distance.FromMiles(5)},
+                {"AD", Distance.FromMiles(5)},
+                {"AE", Distance.FromMiles(7)},
+                {"BC", Distance.FromMiles(4)},
+                {"CD", Distance.FromMiles(8)},
+                {"CE", Distance.FromMiles(2)},
+                {"DC", Distance.FromMiles(8)},
+                {"DE", Distance.FromMiles(6)},
+                {"EB", Distance.FromMiles(3)},
+            };
+            mapRepository.Map().Returns(map);
+            var distanceCalculator = Substitute.For<IDistanceCalculator>();
+            _planner = new JourneyPlanner(mapRepository, distanceCalculator);
         }
 
         [TestCase("AC", ExpectedResult = "9")]
@@ -33,8 +49,22 @@ namespace Trains.Tests.Unit
         [SetUp]
         public void SetUp()
         {
-            //TODO: mock the repo
-            _planner = new JourneyPlanner(new MapRespository(), new DistanceCalculator(new MapRespository()));
+            var mapRepository = Substitute.For<IMapRepository>();
+            var map = new Dictionary<string, Distance>
+            {
+                {"AB", Distance.FromMiles(5)},
+                {"AD", Distance.FromMiles(5)},
+                {"AE", Distance.FromMiles(7)},
+                {"BC", Distance.FromMiles(4)},
+                {"CD", Distance.FromMiles(8)},
+                {"CE", Distance.FromMiles(2)},
+                {"DC", Distance.FromMiles(8)},
+                {"DE", Distance.FromMiles(6)},
+                {"EB", Distance.FromMiles(3)},
+            };
+            mapRepository.Map().Returns(map);
+            var distanceCalculator = Substitute.For<IDistanceCalculator>();
+            _planner = new JourneyPlanner(mapRepository, distanceCalculator);
         }
 
         [TestCase("CC", 30, ExpectedResult = "7")]

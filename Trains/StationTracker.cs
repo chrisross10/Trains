@@ -1,4 +1,7 @@
-﻿namespace Trains
+﻿using System.Collections.Generic;
+using System.Linq;
+
+namespace Trains
 {
     public class StationTracker : IStationTracker
     {
@@ -22,7 +25,7 @@
 
         private int TripsRecursive(string start, string end, int numberOfTrips, int maxTrips, ref int counter)
         {
-            var startTrips = _mapRepository.GetAllTripsThatStartWith(start);
+            var startTrips = GetAllTripsThatStartWith(start);
             numberOfTrips++;
             foreach (var trip in startTrips)
             {
@@ -52,7 +55,7 @@
 
         private int ExactTripsRecursive(string start, string end, int numberOfRoutes, int exactTrips, ref int counter)
         {
-            var startTrips = _mapRepository.GetAllTripsThatStartWith(start);
+            var startTrips = GetAllTripsThatStartWith(start);
             numberOfRoutes++;
             foreach (var trip in startTrips)
             {
@@ -67,6 +70,11 @@
                 ExactTripsRecursive(trip[1].ToString(), end, numberOfRoutes, exactTrips, ref counter);
             }
             return counter;
+        }
+
+        private List<string> GetAllTripsThatStartWith(string start)
+        {
+            return _mapRepository.Map().Keys.Where(k => k.StartsWith(start)).ToList();
         }
     }
 }

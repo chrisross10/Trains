@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using NSubstitute;
 using NUnit.Framework;
 
 namespace Trains.Tests.Unit
@@ -6,12 +7,13 @@ namespace Trains.Tests.Unit
     [TestFixture]
     public class RailNetwork_NumberOfTripsWithMax_Tests
     {
-        private RailNetwork _network;
+        private StationTracker _tracker;
 
         [SetUp]
         public void SetUp()
         {
-            _network = new RailNetwork(new DistanceCalculator(new MapRespository()), new StationTracker(new MapRespository()), new JourneyPlanner(new MapRespository(), new DistanceCalculator(new MapRespository())));
+            var mapRepository = Substitute.For<IMapRepository>();
+            _tracker = new StationTracker(mapRepository);
         }
 
         [TestCase("CC3", ExpectedResult = 2)]
@@ -22,7 +24,7 @@ namespace Trains.Tests.Unit
         [TestCase("AB5", ExpectedResult = 8)]
         public int It_calculates_the_number_of_trips(string journey)
         {
-            return _network.Trips(journey);
+            return _tracker.Trips(journey);
         }
     }
 }

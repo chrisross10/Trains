@@ -4,12 +4,6 @@ using System.Text;
 
 namespace Trains
 {
-    public interface IJourneyPlanner
-    {
-        TravelResult Shortest(string route);
-        string AllRoutesWithin(string journey, int maxDistance);
-    }
-
     public class JourneyPlanner : IJourneyPlanner
     {
         private readonly IMapRepository _mapRepository;
@@ -40,7 +34,7 @@ namespace Trains
 
         private List<string> AllRoutes(string start, string end, ref List<string> allRoutes, ref List<string> currentRoute)
         {
-            var startTrips = _mapRepository.GetAllTripsThatStartWith(start);
+            var startTrips = GetAllTripsThatStartWith(start);
             foreach (var trip in startTrips)
             {
                 if (currentRoute.Contains(trip))
@@ -73,7 +67,7 @@ namespace Trains
 
         private List<string> AllRoutesWithinRecursive(string start, string end, int maxDistance, ref List<string> allRoutes, ref List<string> currentRoute)
         {
-            var startTrips = _mapRepository.GetAllTripsThatStartWith(start);
+            var startTrips = GetAllTripsThatStartWith(start);
             foreach (var trip in startTrips)
             {
                 currentRoute.Add(trip);
@@ -103,6 +97,11 @@ namespace Trains
                     sb.Append(currentRoute[i].First());
             }
             return sb.ToString();
+        }
+
+        private List<string> GetAllTripsThatStartWith(string start)
+        {
+            return _mapRepository.Map().Keys.Where(k => k.StartsWith(start)).ToList();
         }
     }
 }

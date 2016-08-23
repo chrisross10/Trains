@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using NSubstitute;
+using NUnit.Framework;
 
 namespace Trains.Tests.Unit
 {
@@ -10,7 +11,8 @@ namespace Trains.Tests.Unit
         [SetUp]
         public void SetUp()
         {
-            _calc = new DistanceCalculator(new MapRespository());
+            var mapRepository = Substitute.For<IMapRepository>();
+            _calc = new DistanceCalculator(mapRepository);
         }
 
         [TestCase("ABC", ExpectedResult = "9")]
