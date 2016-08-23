@@ -24,7 +24,7 @@ namespace Trains.Tests.Unit
                 {"DE", Distance.FromMiles(6)},
                 {"EB", Distance.FromMiles(3)},
             };
-            _network = new RailNetwork(new MapRespository(), new DistanceCalculator(new MapRespository()),new JourneyPlanner(new MapRespository(),new DistanceCalculator(new MapRespository())));
+            _network = new RailNetwork(new DistanceCalculator(new MapRespository()), new StationTracker(new MapRespository()), new JourneyPlanner(new MapRespository(), new DistanceCalculator(new MapRespository())));
         }
 
         [TestCase("AC4", ExpectedResult = 3)]

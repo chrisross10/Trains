@@ -11,7 +11,7 @@ namespace Trains.Tests.Unit
         [SetUp]
         public void SetUp()
         {
-            _network = new RailNetwork(new MapRespository(), new DistanceCalculator(new MapRespository()), new JourneyPlanner(new MapRespository(), new DistanceCalculator(new MapRespository())));
+            _network = new RailNetwork(new DistanceCalculator(new MapRespository()), new StationTracker(new MapRespository()), new JourneyPlanner(new MapRespository(), new DistanceCalculator(new MapRespository())));
         }
 
         [TestCase("CC3", ExpectedResult = 2)]
