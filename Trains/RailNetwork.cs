@@ -20,7 +20,7 @@
 
         public int Trips(string jouney)
         {
-            return _stationTracker.Trips(jouney);
+            return _stationTracker.Trips(new TripsQuery(jouney));
         }
 
         public int TripsExact(string journey)

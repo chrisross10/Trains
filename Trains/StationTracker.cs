@@ -12,18 +12,15 @@ namespace Trains
             _mapRepository = mapRepository;
         }
 
-        public int Trips(string journey)
+        public int Trips(TripsQuery query)
         {
-            string start = journey[0].ToString();
-            string end = journey[1].ToString();
-            int maxTrips = int.Parse(journey[2].ToString());
             int numberOfTrips = 0;
             int counter = 0;
 
-            return TripsRecursive(start, end, numberOfTrips, maxTrips, ref counter);
+            return TripsRecursive(query.Start, query.End, query.Trips, numberOfTrips, ref counter);
         }
 
-        private int TripsRecursive(string start, string end, int numberOfTrips, int maxTrips, ref int counter)
+        private int TripsRecursive(string start, string end, int maxTrips, int numberOfTrips, ref int counter)
         {
             var startTrips = GetAllTripsThatStartWith(start);
             numberOfTrips++;
@@ -37,7 +34,7 @@ namespace Trains
                 {
                     counter++;
                 }
-                TripsRecursive(trip.End, end, numberOfTrips, maxTrips, ref counter);
+                TripsRecursive(trip.End, end, maxTrips, numberOfTrips, ref counter);
             }
             return counter;
         }
@@ -77,4 +74,6 @@ namespace Trains
             return _mapRepository.Map().Where(r => r.Start.Equals(start)).ToList();
         }
     }
+
+    
 }

@@ -37,7 +37,7 @@ namespace Trains.Tests.Unit
         [TestCase("AB5", ExpectedResult = 8)]
         public int It_calculates_the_number_of_trips(string journey)
         {
-            return _tracker.Trips(journey);
+            return _tracker.Trips(new TripsQuery(journey));
         }
     }
 }
