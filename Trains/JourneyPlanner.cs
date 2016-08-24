@@ -13,39 +13,38 @@ namespace Trains
             _mapRepository = mapRepository;
         }
 
-		public ITravelResult Shortest(IStationsQuery query)
+        public ITravelResult Shortest(IStationsQuery query)
         {
             var allRoutes = new List<KeyValuePair<string, Distance>>();
             var currentRoute = new Journey();
 
-            var shortestRouteRecursive = AllRoutes(query.Start, query.End, ref allRoutes, ref currentRoute);
-            if (shortestRouteRecursive.Count == 0)
+            var possibleRoutes = AllRoutes(query.Start, query.End, ref allRoutes, ref currentRoute);
+            if (possibleRoutes.Count > 0)
             {
-                return new NullTravelResult();
+                var shortestDistance = possibleRoutes.OrderBy(r => r.Value.Miles).First().Value;
+                return new TravelResult(shortestDistance);
             }
-            var journey = shortestRouteRecursive.ToDictionary(r => r.Key, r => r.Value);
-            var distance = journey.OrderBy(d => d.Value.Miles).First().Value;
-            return new TravelResult(distance);
+            return new NullTravelResult();
         }
 
-        private List<KeyValuePair<string, Distance>> AllRoutes(string start, string end, ref List<KeyValuePair<string, Distance>> allRoutes, ref Journey currentRoute)
+        private List<KeyValuePair<string, Distance>> AllRoutes(string start, string end, ref List<KeyValuePair<string, Distance>> allRoutes, ref Journey journey)
         {
             var startTrips = GetAllTripsThatStartWith(start);
             foreach (var trip in startTrips)
             {
-                if (currentRoute.Contains(trip))
+                if (journey.Contains(trip))
                 {
                     continue;
                 }
-                currentRoute.Add(trip);
+                journey.Add(trip);
                 if (trip.End.Equals(end))
                 {
-                    allRoutes.Add(currentRoute.FlattenRoute());
-                    currentRoute.RemovePrevious();
+                    allRoutes.Add(journey.FlattenRoute());
+                    journey.RemovePrevious();
                     continue;
                 }
-                AllRoutes(trip.End, end, ref allRoutes, ref currentRoute);
-                currentRoute.RemovePrevious();
+                AllRoutes(trip.End, end, ref allRoutes, ref journey);
+                journey.RemovePrevious();
             }
             return allRoutes;
         }
@@ -54,7 +53,7 @@ namespace Trains
         {
             var allRoutes = new List<KeyValuePair<string, Distance>>();
             var currentRoute = new Journey();
-			var routes = AllRoutesWithinRecursive(query.Start, query.End, query.MaxDistance.Miles, ref allRoutes, ref currentRoute);
+            var routes = AllRoutesWithinRecursive(query.Start, query.End, query.MaxDistance.Miles, ref allRoutes, ref currentRoute);
             return routes.Count;
         }
 
@@ -79,8 +78,6 @@ namespace Trains
             }
             return allRoutes;
         }
-
-       
 
         private IEnumerable<Route> GetAllTripsThatStartWith(string start)
         {
