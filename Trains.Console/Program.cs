@@ -121,11 +121,8 @@ namespace Trains.App
 			}
 			if (command.Equals("-n"))
 			{
-				var allRoutes = railNetwork.AllRoutesWithin(query);
-				foreach (var r in allRoutes)
-				{
-					Console.WriteLine(r);
-				}
+				var numberOfRoutes = railNetwork.AllRoutesWithin(query);
+				Console.WriteLine(numberOfRoutes);
 			}
 		}
 

@@ -29,8 +29,8 @@ namespace Trains.Tests.Unit
 			_planner = new JourneyPlanner(mapRepository);
 		}
 
-		[TestCase("CC30", ExpectedResult = "7")]
-		public string It_finds_all_possible_routes_within_a_given_distance(string journey)
+		[TestCase("CC30", ExpectedResult = 7)]
+		public int It_finds_all_possible_routes_within_a_given_distance(string journey)
 		{
 			return _planner.AllRoutesWithin(new DistanceQuery(journey));
 		}

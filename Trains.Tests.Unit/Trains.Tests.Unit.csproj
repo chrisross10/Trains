@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AllRoutesWithALimitedDistance_Tests.cs" />
+    <Compile Include="RailNetwork_Tests.cs" />
     <Compile Include="StationTracker_ExactNumberOfTrips_Tests.cs" />
     <Compile Include="StationTracker_NumberOfTripsWithMax_Tests.cs" />
     <Compile Include="DistanceCalculator_Tests.cs" />

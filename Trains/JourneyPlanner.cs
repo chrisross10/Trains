@@ -50,12 +50,12 @@ namespace Trains
             return allRoutes;
         }
 
-        public string AllRoutesWithin(DistanceQuery query)
+        public int AllRoutesWithin(DistanceQuery query)
         {
             var allRoutes = new List<KeyValuePair<string, Distance>>();
             var currentRoute = new Journey();
 			var routes = AllRoutesWithinRecursive(query.Start, query.End, query.MaxDistance.Miles, ref allRoutes, ref currentRoute);
-            return routes.Count.ToString();
+            return routes.Count;
         }
 
         private List<KeyValuePair<string, Distance>> AllRoutesWithinRecursive(string start, string end, int maxDistance, ref List<KeyValuePair<string, Distance>> allRoutes,

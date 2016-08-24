@@ -33,7 +33,7 @@
 			return _journeyPlanner.Shortest(new TravelQuery(journey));
 		}
 
-		public string AllRoutesWithin(string journey)
+		public int AllRoutesWithin(string journey)
 		{
 			return _journeyPlanner.AllRoutesWithin(new DistanceQuery(journey));
 		}
