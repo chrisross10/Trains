@@ -34,8 +34,6 @@ namespace Trains.Tests.Unit
         [TestCase("ADC", ExpectedResult = "13")]
         [TestCase("AEBCD", ExpectedResult = "22")]
         [TestCase("AED", ExpectedResult = "NO SUCH ROUTE")]
-        [TestCase("", ExpectedResult = "NO SUCH ROUTE")]
-        [TestCase("*", ExpectedResult = "NO SUCH ROUTE")]
         public string It_calculates_the_distance_of_the_journey(string journey)
         {
             return _calc.DistanceTravelled(journey).Result;
