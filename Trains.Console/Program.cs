@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 
 namespace Trains.App
 {
@@ -7,18 +8,34 @@ namespace Trains.App
     {
         public static void Main(string[] args)
         {
-            //args = new[] { @"..\..\..\Graph.txt", "-d", "ABC" };
+            if (args == null || args.Length != 3)
+            {
+                Console.Write("This program requires 3 arguments. Type -h for help");
+                Environment.Exit(1);
+            }
 
+            // Args 0 - File path
             var filePath = args[0];
             if (!File.Exists(filePath))
             {
                 Console.Write("File does not exist. Please make sure you point to the correct location");
+                Environment.Exit(1);
             }
+
+            // Args 1 - Command
+            var command = args[1];
+            var possibleCommands = new string[] { "-d", "-tm", "-te", "-s", "-n" };
+            if (!possibleCommands.Contains(command))
+            {
+                Console.Write("Unknown command. Type -h for help");
+                Environment.Exit(1);
+            }
+
+            // Args 2 - Query
+            var query = args[2];
 
             var railNetwork = Bootstrap(filePath);
 
-            var command = args[1];
-            var query = args[2];
 
             if (command.Equals("-d"))
             {
