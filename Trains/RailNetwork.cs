@@ -18,9 +18,9 @@
 			return _distanceCalculator.DistanceTravelled(journey);
 		}
 
-		public int Trips(string jouney)
+		public int Trips(string journey)
 		{
-			return _stationTracker.Trips(new TripsQuery(jouney));
+			return _stationTracker.Trips(new TripsQuery(journey));
 		}
 
 		public int TripsExact(string journey)

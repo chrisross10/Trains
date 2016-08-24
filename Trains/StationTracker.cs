@@ -13,7 +13,7 @@ namespace Trains
 			_mapRepository = mapRepository;
 		}
 
-		public int Trips(TripsQuery query)
+		public int Trips(ITripsQuery query)
 		{
 			const int numberOfTrips = 0;
 			var counter = 0;
@@ -35,7 +35,7 @@ namespace Trains
 			return counter;
 		}
 
-		public int TripsExact(TripsQuery query)
+		public int TripsExact(ITripsQuery query)
 		{
 			const int numberOfRoutes = 0;
 			var counter = 0;

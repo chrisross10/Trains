@@ -36,7 +36,7 @@ namespace Trains.Tests.Unit
 		public void It_gets_number_of_trips_with_a_maximum_distance()
 		{
 			var trips = GetRandomTrips();
-			_tracker.Trips(Arg.Any<TripsQuery>()).Returns(trips);
+			_tracker.Trips(Arg.Any<ITripsQuery>()).Returns(trips);
 			var actualTrips = _network.Trips(_journey);
 			Assert.That(actualTrips, Is.EqualTo(trips));
 		}
@@ -45,7 +45,7 @@ namespace Trains.Tests.Unit
 		public void It_gets_number_of_trips_with_an_exact_distance()
 		{
 			var trips = GetRandomTrips();
-			_tracker.TripsExact(Arg.Any<TripsQuery>()).Returns(trips);
+			_tracker.TripsExact(Arg.Any<ITripsQuery>()).Returns(trips);
 			var actualTrips = _network.TripsExact(_journey);
 			Assert.That(actualTrips, Is.EqualTo(trips));
 		}
@@ -54,7 +54,7 @@ namespace Trains.Tests.Unit
 		public void It_gets_the_shortest_distance()
 		{
 			var distance = GetRandomDistance();
-			_planner.Shortest(Arg.Any<TravelQuery>()).Returns(new TravelResult(distance));
+			_planner.Shortest(Arg.Any<IStationsQuery>()).Returns(new TravelResult(distance));
 			var result = _network.Shortest(_journey);
 			Assert.That(result.Distance.Miles, Is.EqualTo(distance.Miles));
 		}
@@ -63,7 +63,7 @@ namespace Trains.Tests.Unit
 		public void It_gets_the_number_of_different_routes_for_a_given_distance()
 		{
 			var trips = GetRandomTrips();
-			_planner.AllRoutesWithin(Arg.Any<DistanceQuery>()).Returns(trips);
+			_planner.AllRoutesWithin(Arg.Any<IDistanceQuery>()).Returns(trips);
 			var actualNumber = _network.AllRoutesWithin(_journey);
 			Assert.That(actualNumber, Is.EqualTo(trips));
 		}

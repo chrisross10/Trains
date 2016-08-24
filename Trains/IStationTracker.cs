@@ -2,7 +2,7 @@
 {
     public interface IStationTracker
     {
-        int Trips(TripsQuery query);
-        int TripsExact(TripsQuery query);
+        int Trips(ITripsQuery query);
+        int TripsExact(ITripsQuery query);
     }
 }

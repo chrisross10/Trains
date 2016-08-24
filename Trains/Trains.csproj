@@ -42,12 +42,14 @@
   <ItemGroup>
     <Compile Include="Models\Distance.cs" />
     <Compile Include="IJourneyPlanner.cs" />
-    <Compile Include="IMapRepository.cs" />
+    <Compile Include="Models\DistanceQuery.cs" />
+    <Compile Include="Models\TripsQuery.cs" />
+    <Compile Include="Persistence\IMapRepository.cs" />
     <Compile Include="IDistanceCalculator.cs" />
     <Compile Include="IStationTracker.cs" />
     <Compile Include="Models\Journey.cs" />
     <Compile Include="JourneyPlanner.cs" />
-    <Compile Include="MapRepository.cs" />
+    <Compile Include="Persistence\MapRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RailNetwork.cs" />
     <Compile Include="DistanceCalculator.cs" />

@@ -13,7 +13,7 @@ namespace Trains
             _mapRepository = mapRepository;
         }
 
-		public TravelResult Shortest(TravelQuery query)
+		public TravelResult Shortest(IStationsQuery query)
         {
             var allRoutes = new List<KeyValuePair<string, Distance>>();
             var currentRoute = new Journey();
@@ -50,7 +50,7 @@ namespace Trains
             return allRoutes;
         }
 
-        public int AllRoutesWithin(DistanceQuery query)
+        public int AllRoutesWithin(IDistanceQuery query)
         {
             var allRoutes = new List<KeyValuePair<string, Distance>>();
             var currentRoute = new Journey();

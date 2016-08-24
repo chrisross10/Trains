@@ -2,21 +2,20 @@ using System.Text.RegularExpressions;
 
 namespace Trains
 {
-    public interface IStationsQuery
+    public interface ITripsQuery : IStationsQuery
     {
-        string Start { get; }
-        string End { get; }
+        int Trips { get; }
     }
 
-    public class TravelQuery : IStationsQuery
+    public class TripsQuery : ITripsQuery
     {
         private readonly string _journey;
         private readonly Regex _regex;
 
-        public TravelQuery(string journey)
+        public TripsQuery(string journey)
         {
             _journey = journey;
-            _regex = new Regex(@"^([a-zA-Z])([a-zA-Z])$");
+            _regex = new Regex(@"^([a-zA-Z])([a-zA-Z])(\d+)$");
         }
 
         public string Start
@@ -27,6 +26,11 @@ namespace Trains
         public string End
         {
             get { return _regex.Replace(_journey, "$2").ToUpper(); }
+        }
+
+        public int Trips
+        {
+            get { return int.Parse(_regex.Replace(_journey, "$3")); }
         }
     }
 }

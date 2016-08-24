@@ -33,8 +33,9 @@ namespace Trains.App
 				Console.WriteLine("-n   Number of different routes between two given stops under a certain distance");
 				Console.WriteLine("-te  Exact number of trips between two given stops");
 				Console.WriteLine("-tm  Max number of trips between two given stops");
+                Console.WriteLine("---------------------------------------");
 
-				Environment.Exit(0);
+                Environment.Exit(0);
 			}
 
 			if (args.Length != 3 && !args.Contains("-h"))
