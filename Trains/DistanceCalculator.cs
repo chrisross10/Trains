@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Linq;
 
 namespace Trains
@@ -21,7 +20,7 @@ namespace Trains
             var totalDistance = Distance.FromMiles(0);
             for (int i = 1; i < journey.Length; i++)
             {
-                var route = map.SingleOrDefault(m => m.Start.Equals(journey[i - 1].ToString()) && m.End.Equals(journey[i].ToString()));
+                var route = map.SingleOrDefault(m => m.Start.Equals(journey[i - 1].ToString().ToUpper()) && m.End.Equals(journey[i].ToString().ToUpper()));
                 if (route != null)
                 {
                     totalDistance = totalDistance.Add(route.Distance);

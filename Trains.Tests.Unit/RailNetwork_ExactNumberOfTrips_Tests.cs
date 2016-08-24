@@ -34,7 +34,7 @@ namespace Trains.Tests.Unit
         [TestCase("CC4", ExpectedResult = 2)]
         public int It_calculates_the_exact_number_of_trips(string journey)
         {
-            return _stationTracker.TripsExact(journey);
+            return _stationTracker.TripsExact(new TripsQuery(journey));
         }
     }
 }

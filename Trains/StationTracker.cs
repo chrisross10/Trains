@@ -14,19 +14,18 @@ namespace Trains
 
         public int Trips(TripsQuery query)
         {
-            int numberOfTrips = 0;
-            int counter = 0;
-
+            const int numberOfTrips = 0;
+            var counter = 0;
             return TripsRecursive(query.Start, query.End, query.Trips, numberOfTrips, ref counter);
         }
 
-        private int TripsRecursive(string start, string end, int maxTrips, int numberOfTrips, ref int counter)
+        private int TripsRecursive(string start, string end, int maxTrips, int numberOfRoutes, ref int counter)
         {
-            var startTrips = GetAllTripsThatStartWith(start);
-            numberOfTrips++;
+            var startTrips = GetAllRoutesThatStartWith(start);
+            numberOfRoutes++;
             foreach (var trip in startTrips)
             {
-                if (numberOfTrips > maxTrips)
+                if (numberOfRoutes > maxTrips)
                 {
                     continue;
                 }
@@ -34,42 +33,38 @@ namespace Trains
                 {
                     counter++;
                 }
-                TripsRecursive(trip.End, end, maxTrips, numberOfTrips, ref counter);
+                TripsRecursive(trip.End, end, maxTrips, numberOfRoutes, ref counter);
             }
             return counter;
         }
 
-        public int TripsExact(string journey)
+        public int TripsExact(TripsQuery query)
         {
-            string start = journey[0].ToString();
-            string end = journey[1].ToString();
-            int exactTrips = int.Parse(journey[2].ToString());
-            int numberOfRoutes = 0;
-            int counter = 0;
-
-            return ExactTripsRecursive(start, end, numberOfRoutes, exactTrips, ref counter);
+            const int numberOfRoutes = 0;
+            var counter = 0;
+            return ExactTripsRecursive(query.Start, query.End, query.Trips, numberOfRoutes, ref counter);
         }
 
-        private int ExactTripsRecursive(string start, string end, int numberOfRoutes, int exactTrips, ref int counter)
+        private int ExactTripsRecursive(string start, string end, int trips, int numberOfRoutes, ref int counter)
         {
-            var startTrips = GetAllTripsThatStartWith(start);
+            var startTrips = GetAllRoutesThatStartWith(start);
             numberOfRoutes++;
             foreach (var trip in startTrips)
             {
-                if (numberOfRoutes > exactTrips)
+                if (numberOfRoutes > trips)
                 {
                     continue;
                 }
-                if (numberOfRoutes == exactTrips && trip.End.Equals(end))
+                if (numberOfRoutes == trips && trip.End.Equals(end))
                 {
                     counter++;
                 }
-                ExactTripsRecursive(trip.End, end, numberOfRoutes, exactTrips, ref counter);
+                ExactTripsRecursive(trip.End, end, trips, numberOfRoutes, ref counter);
             }
             return counter;
         }
 
-        private List<Route> GetAllTripsThatStartWith(string start)
+        private IEnumerable<Route> GetAllRoutesThatStartWith(string start)
         {
             return _mapRepository.Map().Where(r => r.Start.Equals(start)).ToList();
         }
