@@ -15,7 +15,7 @@ namespace Trains
 		{
 			get
 			{
-				var regex = new Regex(@"^([a-zA-Z])([a-zA-Z])$");
+				var regex = new Regex(@"^([a-zA-Z])([a-zA-Z])(\d+)$");
 				var returnValue = regex.Replace(_journey, "$1");
 				return returnValue.ToUpper();
 			}
@@ -25,7 +25,7 @@ namespace Trains
 		{
 			get
 			{
-				var regex = new Regex(@"^([a-zA-Z])([a-zA-Z])$");
+				var regex = new Regex(@"^([a-zA-Z])([a-zA-Z])(\d+)$");
 				var returnValue = regex.Replace(_journey, "$2");
 				return returnValue.ToUpper();
 			}
