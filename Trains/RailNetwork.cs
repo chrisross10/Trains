@@ -28,14 +28,14 @@
 			return _stationTracker.TripsExact(new TripsQuery(journey));
 		}
 
-		public TravelResult Shortest(string route)
+		public TravelResult Shortest(string journey)
 		{
-			return _journeyPlanner.Shortest(new TravelQuery(route));
+			return _journeyPlanner.Shortest(new TravelQuery(journey));
 		}
 
-		public string AllRoutesWithin(string journey, int maxDistance)
+		public string AllRoutesWithin(string journey)
 		{
-			return _journeyPlanner.AllRoutesWithin(journey, maxDistance);
+			return _journeyPlanner.AllRoutesWithin(new DistanceQuery(journey));
 		}
 
 	}

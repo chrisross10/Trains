@@ -50,14 +50,11 @@ namespace Trains
             return allRoutes;
         }
 
-        public string AllRoutesWithin(string journey, int maxDistance)
+        public string AllRoutesWithin(DistanceQuery query)
         {
-            var start = journey[0].ToString();
-            var end = journey[1].ToString();
             var allRoutes = new List<KeyValuePair<string, Distance>>();
             var currentRoute = new Journey();
-
-            var routes = AllRoutesWithinRecursive(start, end, maxDistance, ref allRoutes, ref currentRoute);
+			var routes = AllRoutesWithinRecursive(query.Start, query.End, query.MaxDistance.Miles, ref allRoutes, ref currentRoute);
             return routes.Count.ToString();
         }
 
@@ -98,7 +95,7 @@ namespace Trains
             return new KeyValuePair<string, Distance>(sb.ToString(), totalDistance);
         }
 
-        private List<Route> GetAllTripsThatStartWith(string start)
+        private IEnumerable<Route> GetAllTripsThatStartWith(string start)
         {
             return _mapRepository.Map().Where(k => k.Start.Equals(start)).ToList();
         }

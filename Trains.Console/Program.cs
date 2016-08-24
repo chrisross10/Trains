@@ -121,9 +121,7 @@ namespace Trains.App
 			}
 			if (command.Equals("-n"))
 			{
-				string journey = string.Format("{0}{1}", query[0], query[1]);
-				int maxDistance = int.Parse(string.Format("{0}{1}", query[2], query[3]));
-				var allRoutes = railNetwork.AllRoutesWithin(journey, maxDistance);
+				var allRoutes = railNetwork.AllRoutesWithin(query);
 				foreach (var r in allRoutes)
 				{
 					Console.WriteLine(r);
