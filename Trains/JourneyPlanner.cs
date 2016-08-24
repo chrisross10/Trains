@@ -40,7 +40,7 @@ namespace Trains
                 currentRoute.Add(trip);
                 if (trip.End.Equals(end))
                 {
-                    allRoutes.Add(FlattenRoute(currentRoute));
+                    allRoutes.Add(currentRoute.FlattenRoute());
                     currentRoute.RemovePrevious();
                     continue;
                 }
@@ -72,7 +72,7 @@ namespace Trains
                 }
                 if (trip.End.Equals(end))
                 {
-                    allRoutes.Add(FlattenRoute(currentRoute));
+                    allRoutes.Add(currentRoute.FlattenRoute());
                 }
                 AllRoutesWithinRecursive(trip.End, end, maxDistance, ref allRoutes, ref currentRoute);
                 currentRoute.RemovePrevious();
@@ -80,20 +80,7 @@ namespace Trains
             return allRoutes;
         }
 
-        private KeyValuePair<string, Distance> FlattenRoute(Journey currentRoute)
-        {
-            var sb = new StringBuilder();
-            var totalDistance = Distance.FromMiles(0);
-            for (int i = 0; i < currentRoute.Routes.Count; i++)
-            {
-                totalDistance = totalDistance.Add(currentRoute.Routes[i].Distance);
-                if (i == currentRoute.Routes.Count - 1)
-                    sb.Append(currentRoute.Routes[i].Start + currentRoute.Routes[i].End);
-                else
-                    sb.Append(currentRoute.Routes[i].Start);
-            }
-            return new KeyValuePair<string, Distance>(sb.ToString(), totalDistance);
-        }
+       
 
         private IEnumerable<Route> GetAllTripsThatStartWith(string start)
         {

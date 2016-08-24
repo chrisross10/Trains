@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 
 namespace Trains
 {
@@ -32,6 +33,21 @@ namespace Trains
         public void RemovePrevious()
         {
             _journey.RemoveAt(_journey.Count - 1);
+        }
+
+        public KeyValuePair<string, Distance> FlattenRoute()
+        {
+            var sb = new StringBuilder();
+            var totalDistance = Distance.FromMiles(0);
+            for (int i = 0; i < this.Routes.Count; i++)
+            {
+                totalDistance = totalDistance.Add(this.Routes[i].Distance);
+                if (i == this.Routes.Count - 1)
+                    sb.Append(this.Routes[i].Start + this.Routes[i].End);
+                else
+                    sb.Append(this.Routes[i].Start);
+            }
+            return new KeyValuePair<string, Distance>(sb.ToString(), totalDistance);
         }
     }
 }
