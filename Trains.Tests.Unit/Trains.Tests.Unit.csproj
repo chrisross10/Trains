@@ -48,8 +48,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="RailNetwork_ExactNumberOfTrips_Tests.cs" />
-    <Compile Include="RailNetwork_NumberOfTripsWithMax_Tests.cs" />
+    <Compile Include="AllRoutesWithALimitedDistance_Tests.cs" />
+    <Compile Include="StationTracker_ExactNumberOfTrips_Tests.cs" />
+    <Compile Include="StationTracker_NumberOfTripsWithMax_Tests.cs" />
     <Compile Include="DistanceCalculator_Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShortestRoute_Tests.cs" />

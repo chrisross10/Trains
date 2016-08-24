@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace Trains.Tests.Unit
 {
     [TestFixture]
-    public class RailNetwork_NumberOfTripsWithMax_Tests
+    public class StationTracker_NumberOfTripsWithMax_Tests
     {
         private StationTracker _tracker;
 

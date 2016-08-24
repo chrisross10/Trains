@@ -37,6 +37,5 @@
 		{
 			return _journeyPlanner.AllRoutesWithin(new DistanceQuery(journey));
 		}
-
 	}
 }
