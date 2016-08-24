@@ -19,9 +19,4 @@
             get { return _distance.Miles.ToString(); }
         }
     }
-
-    public class NullTravelResult : ITravelResult
-    {
-        public string Result { get { return "NO SUCH ROUTE"; } }
-    }
 }

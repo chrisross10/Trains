@@ -43,6 +43,7 @@
     <Compile Include="Models\Distance.cs" />
     <Compile Include="IJourneyPlanner.cs" />
     <Compile Include="Models\DistanceQuery.cs" />
+    <Compile Include="Models\NullTravelResult.cs" />
     <Compile Include="Models\TripsQuery.cs" />
     <Compile Include="Persistence\IMapRepository.cs" />
     <Compile Include="IDistanceCalculator.cs" />
