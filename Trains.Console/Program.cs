@@ -138,7 +138,8 @@ namespace Trains.App
 	            var numberOfRoutes = railNetwork.AllRoutesWithin(query);
 	            Console.WriteLine(numberOfRoutes);
 	        }
-        }
+	        Environment.Exit(0);
+	    }
 
 	    private static RailNetwork Bootstrap(string filePath)
 		{
