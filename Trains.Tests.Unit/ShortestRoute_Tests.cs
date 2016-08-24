@@ -29,12 +29,12 @@ namespace Trains.Tests.Unit
 			_planner = new JourneyPlanner(mapRepository);
 		}
 
-		[TestCase("AC", ExpectedResult = "9")]
-		[TestCase("CC", ExpectedResult = "9")]
-		[TestCase("BB", ExpectedResult = "9")]
-		[TestCase("AD", ExpectedResult = "5")]
-		[TestCase("CA", ExpectedResult = "NO SUCH ROUTE")]
-		[TestCase("AB", ExpectedResult = "5")]
+        [TestCase("AC", ExpectedResult = "9")]
+        [TestCase("CC", ExpectedResult = "9")]
+        [TestCase("BB", ExpectedResult = "9")]
+        [TestCase("AD", ExpectedResult = "5")]
+        [TestCase("CA", ExpectedResult = "NO SUCH ROUTE")]
+        [TestCase("AB", ExpectedResult = "5")]
 		public string It_finds_shortest_route(string route)
 		{
 			return _planner.Shortest(new TravelQuery(route)).Result;

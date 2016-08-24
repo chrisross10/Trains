@@ -9,7 +9,7 @@ namespace Trains.App
 	{
 		public static void Main(string[] args)
 		{
-			//args = new[] {"../../../Graph.txt", "-tm", "CC3"};
+			//args = new[] {"../../../Graph.txt", "-s", "AB"};
 
 			if (args == null || (args.Length != 3 && !args.Contains("-h")))
 			{

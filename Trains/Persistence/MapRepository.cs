@@ -17,7 +17,7 @@ namespace Trains
 
         public List<Route> Map()
         {
-            return _map ?? _graph.Replace(" ", string.Empty).Split(',').Select(route => new Route(route[0].ToString(),
+            return _map = _map ?? _graph.Replace(" ", string.Empty).Split(',').Select(route => new Route(route[0].ToString(),
                 route[1].ToString(),
                 Distance.FromMiles(int.Parse(route[2].ToString())))).ToList();
         }
