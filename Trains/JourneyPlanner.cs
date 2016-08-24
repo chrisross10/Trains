@@ -53,8 +53,7 @@ namespace Trains
         {
             var allRoutes = new List<KeyValuePair<string, Distance>>();
             var currentRoute = new Journey();
-            var routes = AllRoutesWithinRecursive(query.Start, query.End, query.MaxDistance.Miles, ref allRoutes, ref currentRoute);
-            return routes.Count;
+            return AllRoutesWithinRecursive(query.Start, query.End, query.MaxDistance.Miles, ref allRoutes, ref currentRoute).Count;
         }
 
         private List<KeyValuePair<string, Distance>> AllRoutesWithinRecursive(string start, string end, int maxDistance, ref List<KeyValuePair<string, Distance>> allRoutes,
@@ -64,7 +63,7 @@ namespace Trains
             foreach (var trip in startTrips)
             {
                 currentRoute.Add(trip);
-                if (currentRoute.Sum(r => r.Distance.Miles) >= maxDistance)
+                if (currentRoute.TotalMiles >= maxDistance)
                 {
                     currentRoute.RemovePrevious();
                     continue;

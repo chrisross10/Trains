@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Trains
@@ -48,6 +49,14 @@ namespace Trains
                     sb.Append(this.Routes[i].Start);
             }
             return new KeyValuePair<string, Distance>(sb.ToString(), totalDistance);
+        }
+
+        public int TotalMiles
+        {
+            get
+            {
+                return _journey.Sum(r => r.Distance.Miles);
+            }
         }
     }
 }
