@@ -54,7 +54,7 @@
     <Compile Include="Route.cs" />
     <Compile Include="StationTracker.cs" />
     <Compile Include="TravelResult.cs" />
-    <Compile Include="TripsQuery.cs" />
+    <Compile Include="TravelQuery.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

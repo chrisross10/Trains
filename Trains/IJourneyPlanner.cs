@@ -2,7 +2,7 @@ namespace Trains
 {
     public interface IJourneyPlanner
     {
-        TravelResult Shortest(string route);
+		TravelResult Shortest(TravelQuery query);
         string AllRoutesWithin(string journey, int maxDistance);
     }
 }

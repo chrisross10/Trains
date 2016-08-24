@@ -13,14 +13,12 @@ namespace Trains
             _mapRepository = mapRepository;
         }
 
-        public TravelResult Shortest(string route)
+		public TravelResult Shortest(TravelQuery query)
         {
-            var start = route[0].ToString();
-            var end = route[1].ToString();
             var allRoutes = new List<KeyValuePair<string, Distance>>();
             var currentRoute = new Journey();
 
-            var shortestRouteRecursive = AllRoutes(start, end, ref allRoutes, ref currentRoute);
+            var shortestRouteRecursive = AllRoutes(query.Start, query.End, ref allRoutes, ref currentRoute);
             if (shortestRouteRecursive.Count == 0)
             {
                 return new TravelResult(null);

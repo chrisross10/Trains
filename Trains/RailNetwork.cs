@@ -30,7 +30,7 @@
 
 		public TravelResult Shortest(string route)
 		{
-			return _journeyPlanner.Shortest(route);
+			return _journeyPlanner.Shortest(new TravelQuery(route));
 		}
 
 		public string AllRoutesWithin(string journey, int maxDistance)
