@@ -1,6 +1,11 @@
 ﻿namespace Trains
 {
-    public class TravelResult
+    public interface ITravelResult
+    {
+        string Result { get; }
+    }
+
+    public class TravelResult : ITravelResult
     {
         private readonly Distance _distance;
 
@@ -11,9 +16,12 @@
 
         public string Result
         {
-            get { return _distance != null ? _distance.Miles.ToString() : "NO SUCH ROUTE"; }
+            get { return _distance.Miles.ToString(); }
         }
+    }
 
-        public Distance Distance { get {return _distance;} }
+    public class NullTravelResult : ITravelResult
+    {
+        public string Result { get { return "NO SUCH ROUTE"; } }
     }
 }

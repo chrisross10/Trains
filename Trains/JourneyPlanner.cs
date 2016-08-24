@@ -13,7 +13,7 @@ namespace Trains
             _mapRepository = mapRepository;
         }
 
-		public TravelResult Shortest(IStationsQuery query)
+		public ITravelResult Shortest(IStationsQuery query)
         {
             var allRoutes = new List<KeyValuePair<string, Distance>>();
             var currentRoute = new Journey();
@@ -21,7 +21,7 @@ namespace Trains
             var shortestRouteRecursive = AllRoutes(query.Start, query.End, ref allRoutes, ref currentRoute);
             if (shortestRouteRecursive.Count == 0)
             {
-                return new TravelResult(null);
+                return new NullTravelResult();
             }
             var journey = shortestRouteRecursive.ToDictionary(r => r.Key, r => r.Value);
             var distance = journey.OrderBy(d => d.Value.Miles).First().Value;

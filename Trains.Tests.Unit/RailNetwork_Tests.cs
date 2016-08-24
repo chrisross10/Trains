@@ -29,7 +29,7 @@ namespace Trains.Tests.Unit
 			var distance = GetRandomDistance();
 			_calculator.DistanceTravelled(_journey).Returns(new TravelResult(distance));
 			var travelResult = _network.Travel(_journey);
-			Assert.That(travelResult.Distance.Miles, Is.EqualTo(distance.Miles));
+			Assert.That(travelResult.Result, Is.EqualTo(distance.Miles.ToString()));
 		}
 
 		[Test]
@@ -56,7 +56,7 @@ namespace Trains.Tests.Unit
 			var distance = GetRandomDistance();
 			_planner.Shortest(Arg.Any<IStationsQuery>()).Returns(new TravelResult(distance));
 			var result = _network.Shortest(_journey);
-			Assert.That(result.Distance.Miles, Is.EqualTo(distance.Miles));
+			Assert.That(result.Result, Is.EqualTo(distance.Miles.ToString()));
 		}
 
 		[Test]

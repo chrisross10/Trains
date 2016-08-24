@@ -13,7 +13,7 @@
 			_journeyPlanner = journeyPlanner;
 		}
 
-		public TravelResult Travel(string journey)
+		public ITravelResult Travel(string journey)
 		{
 			return _distanceCalculator.DistanceTravelled(journey);
 		}
@@ -28,7 +28,7 @@
 			return _stationTracker.TripsExact(new TripsQuery(journey));
 		}
 
-		public TravelResult Shortest(string journey)
+		public ITravelResult Shortest(string journey)
 		{
 			return _journeyPlanner.Shortest(new TravelQuery(journey));
 		}
