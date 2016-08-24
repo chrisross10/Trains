@@ -15,19 +15,19 @@ namespace Trains
 
         public ITravelResult Shortest(IStationsQuery query)
         {
-            var allRoutes = new List<KeyValuePair<string, Distance>>();
+            var allRoutes = new List<FlatRoute>();
             var currentRoute = new Journey();
 
             var possibleRoutes = AllRoutes(query.Start, query.End, ref allRoutes, ref currentRoute);
             if (possibleRoutes.Count > 0)
             {
-                var shortestDistance = possibleRoutes.OrderBy(r => r.Value.Miles).First().Value;
+                var shortestDistance = possibleRoutes.OrderBy(r => r.Distance.Miles).First().Distance;
                 return new TravelResult(shortestDistance);
             }
             return new NullTravelResult();
         }
 
-        private List<KeyValuePair<string, Distance>> AllRoutes(string start, string end, ref List<KeyValuePair<string, Distance>> allRoutes, ref Journey journey)
+        private List<FlatRoute> AllRoutes(string start, string end, ref List<FlatRoute> allRoutes, ref Journey journey)
         {
             var startTrips = GetAllTripsThatStartWith(start);
             foreach (var trip in startTrips)
@@ -51,12 +51,12 @@ namespace Trains
 
         public int AllRoutesWithin(IDistanceQuery query)
         {
-            var allRoutes = new List<KeyValuePair<string, Distance>>();
+            var allRoutes = new List<FlatRoute>();
             var currentRoute = new Journey();
             return AllRoutesWithinRecursive(query.Start, query.End, query.MaxDistance.Miles, ref allRoutes, ref currentRoute).Count;
         }
 
-        private List<KeyValuePair<string, Distance>> AllRoutesWithinRecursive(string start, string end, int maxDistance, ref List<KeyValuePair<string, Distance>> allRoutes,
+        private List<FlatRoute> AllRoutesWithinRecursive(string start, string end, int maxDistance, ref List<FlatRoute> allRoutes,
             ref Journey currentRoute)
         {
             var startTrips = GetAllTripsThatStartWith(start);

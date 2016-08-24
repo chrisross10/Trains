@@ -36,7 +36,7 @@ namespace Trains
             _journey.RemoveAt(_journey.Count - 1);
         }
 
-        public KeyValuePair<string, Distance> FlattenRoute()
+        public FlatRoute FlattenRoute()
         {
             var sb = new StringBuilder();
             var totalDistance = Distance.FromMiles(0);
@@ -48,7 +48,7 @@ namespace Trains
                 else
                     sb.Append(this.Routes[i].Start);
             }
-            return new KeyValuePair<string, Distance>(sb.ToString(), totalDistance);
+            return new FlatRoute(sb.ToString(), totalDistance);
         }
 
         public int TotalMiles
