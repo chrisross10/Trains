@@ -5,8 +5,6 @@ namespace Trains
         private readonly string _route;
         private readonly Distance _distance;
 
-        public FlatRoute() { }
-
         public FlatRoute(string route, Distance distance)
         {
             _route = route;
