@@ -43,17 +43,17 @@ You can point the application to any other data file by specifying it in the com
 
 There are 6 commands:
 
--d   Distance between given stops
+* -d   Distance between given stops
      Eg. ```Trains.App.exe [FILEPATH] -d ABC```
--h   Help menu
+* -h   Help menu
      Eg. ```Trains.App.exe -h```
--s   Length of the shortest route between two given stops
+* -s   Length of the shortest route between two given stops
      Eg. ```Trains.App.exe [FILEPATH] -s AC```
--n   Number of different routes between two given stops under a certain distance
+* -n   Number of different routes between two given stops under a certain distance
      Eg. ```Trains.App.exe [FILEPATH] -n CC30```
--te  Exact number of trips between two given stops
+* -te  Exact number of trips between two given stops
      Eg. ```Trains.App.exe [FILEPATH] -te AC4```
--tm  Max number of trips between two given stops
+* -tm  Max number of trips between two given stops
      Eg. ```Trains.App.exe [FILEPATH] -tm CC3```
      
 The application exits immediately after displaying the result.
@@ -61,9 +61,9 @@ The application exits immediately after displaying the result.
 ## Queries
 
 The queries vary depending on which command you choose.
--d     This needs to display the entire route and have a minimum of two stations. Eg "AB" or "ABCDE".
--s     This must contain only two stations. Eg "AC" or "BD".
--n     This must contain two stations and an integer representing the maximum distance between the two stations. Eg. "CC30" or "AE20".
--te    This must contain two stations and an integer representing the exact number of trips between the two stations. Eg. "AC4" or "BD10"
--tm    This must contain two stations and an integer representing the maximum number of trips between the two stations. Eg. "CC3" or "CE15"
+* -d     This needs to display the entire route and have a minimum of two stations. Eg "AB" or "ABCDE".
+* -s     This must contain only two stations. Eg "AC" or "BD".
+* -n     This must contain two stations and an integer representing the maximum distance between the two stations. Eg. "CC30" or "AE20".
+* -te    This must contain two stations and an integer representing the exact number of trips between the two stations. Eg. "AC4" or "BD10"
+* -tm    This must contain two stations and an integer representing the maximum number of trips between the two stations. Eg. "CC3" or "CE15"
 
