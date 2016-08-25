@@ -5,19 +5,26 @@ This application is written in C# .NET and it's used to calculate distances and 
 ## Installation Instructions
 
 ### Make sure you have MSBuild installed.
+
 ## Windows
 If you are using a Windows machine, make sure you have the latest version of .NET installed first.
 MSBuild comes out of the box with .NET.
+
 ## Mac/Linux
 Please refer to the official Github repository for installation instructions on various platforms.
 https://github.com/Microsoft/msbuild.
 
 ## Assumptions
 
-The data or rail network map consists of routes: [StationFrom][StationTo][DistanceBetween], eg AB5.
-Each route must be comma seperated.
-The station names must only be one alpha-character, [a-zA-Z].
-The distance may be of any integer size greater than ZERO.
++ The data or rail network map consists of routes: [StationFrom][StationTo][DistanceBetween], eg AB5.
+
++ Each route must be comma seperated.
+
++ The station names must only be one alpha-character, [a-zA-Z].
+
++ The distance may be of any integer size greater than ZERO.
+
++ The application treats the unit of distance as *miles*.
 
 ## Run the application
 
