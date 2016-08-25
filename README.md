@@ -12,7 +12,7 @@ This application is written in C# .NET and it's used to calculate distances and 
 + MSBuild comes out of the box with .NET, so if you already have .NET installed, you won't need to install MSBuild.
 
 ## Mac/Linux
-+ Please refer to the official Github repository for installation [instructions](https://github.com/Microsoft/msbuild) on various platforms.
++ Please refer to the official MSBuild Github [repository](https://github.com/Microsoft/msbuild) for installation instructions on various platforms.
 
 ## Assumptions
 
