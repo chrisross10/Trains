@@ -11,7 +11,8 @@ namespace Trains.Tests.Unit
 		private IDistanceCalculator _calculator;
 		private string _journey;
 		private ITripCounterWithMax _counterWithMax;
-		private IJourneyPlanner _planner;
+		private IShortestRouteFinder _shortestRouteFinder;
+		private IRoutesWithinAGivenDistanceFinder _routesFinder;
 		private ITripCounterWithExact _counterWithExact;
 
 		[SetUp]
@@ -20,9 +21,10 @@ namespace Trains.Tests.Unit
 			_calculator = Substitute.For<IDistanceCalculator>();
 			_counterWithMax = Substitute.For<ITripCounterWithMax>();
 			_counterWithExact = Substitute.For<ITripCounterWithExact>();
-			_planner = Substitute.For<IJourneyPlanner>();
+			_shortestRouteFinder = Substitute.For<IShortestRouteFinder>();
+            _routesFinder = Substitute.For<IRoutesWithinAGivenDistanceFinder>();
 			_journey = Guid.NewGuid().ToString();
-			_network = new RailNetwork(_calculator, _counterWithMax,_counterWithExact, _planner);
+			_network = new RailNetwork(_calculator, _counterWithMax,_counterWithExact, _shortestRouteFinder, _routesFinder);
 		}
 
 		[Test]
@@ -56,7 +58,7 @@ namespace Trains.Tests.Unit
 		public void It_gets_the_shortest_distance()
 		{
 			var distance = GetRandomDistance();
-			_planner.Shortest(Arg.Any<IStationsQuery>()).Returns(new TravelResult(distance));
+			_shortestRouteFinder.Shortest(Arg.Any<IStationsQuery>()).Returns(new TravelResult(distance));
 			var result = _network.Shortest(_journey);
 			Assert.That(result.Result, Is.EqualTo(distance.Miles.ToString()));
 		}
@@ -65,7 +67,7 @@ namespace Trains.Tests.Unit
 		public void It_gets_the_number_of_different_routes_for_a_given_distance()
 		{
 			var trips = GetRandomTrips();
-			_planner.AllRoutesWithin(Arg.Any<IDistanceQuery>()).Returns(trips);
+            _routesFinder.AllRoutesWithin(Arg.Any<IDistanceQuery>()).Returns(trips);
 			var actualNumber = _network.AllRoutesWithin(_journey);
 			Assert.That(actualNumber, Is.EqualTo(trips));
 		}

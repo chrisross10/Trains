@@ -3,13 +3,13 @@ using System.Linq;
 
 namespace Trains
 {
-    public class JourneyPlanner : IJourneyPlanner
+    public class ShortestRouteFinder : IShortestRouteFinder
     {
-        private readonly IMapRepository _mapRepository;
+        private readonly IMapRepository _repository;
 
-        public JourneyPlanner(IMapRepository mapRepository)
+        public ShortestRouteFinder(IMapRepository repository)
         {
-            _mapRepository = mapRepository;
+            _repository = repository;
         }
 
         public ITravelResult Shortest(IStationsQuery query)
@@ -48,38 +48,9 @@ namespace Trains
             return allRoutes;
         }
 
-        public int AllRoutesWithin(IDistanceQuery query)
-        {
-            var allRoutes = new List<FlatRoute>();
-            var currentRoute = new Journey();
-            return AllRoutesWithinRecursive(query.Start, query.End, query.MaxDistance.Miles, ref allRoutes, ref currentRoute).Count;
-        }
-
-        private List<FlatRoute> AllRoutesWithinRecursive(string start, string end, int maxDistance, ref List<FlatRoute> allRoutes,
-            ref Journey currentRoute)
-        {
-            var startTrips = GetAllTripsThatStartWith(start);
-            foreach (var trip in startTrips)
-            {
-                currentRoute.Add(trip);
-                if (currentRoute.TotalMiles >= maxDistance)
-                {
-                    currentRoute.RemovePrevious();
-                    continue;
-                }
-                if (trip.End.Equals(end))
-                {
-                    allRoutes.Add(currentRoute.FlattenRoute());
-                }
-                AllRoutesWithinRecursive(trip.End, end, maxDistance, ref allRoutes, ref currentRoute);
-                currentRoute.RemovePrevious();
-            }
-            return allRoutes;
-        }
-
         private IEnumerable<Route> GetAllTripsThatStartWith(string start)
         {
-            return _mapRepository.Map().Where(k => k.Start.Equals(start)).ToList();
+            return _repository.Map().Where(k => k.Start.Equals(start)).ToList();
         }
     }
 }

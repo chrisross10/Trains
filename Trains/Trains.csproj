@@ -40,10 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IRoutesWithinAGivenDistanceFinder.cs" />
     <Compile Include="ITripCounterWithExact.cs" />
     <Compile Include="Models\FlatRoute.cs" />
     <Compile Include="Models\Distance.cs" />
-    <Compile Include="IJourneyPlanner.cs" />
+    <Compile Include="IShortestRouteFinder.cs" />
     <Compile Include="Models\DistanceQuery.cs" />
     <Compile Include="Models\NullTravelResult.cs" />
     <Compile Include="Models\TripsQuery.cs" />
@@ -51,7 +52,8 @@
     <Compile Include="IDistanceCalculator.cs" />
     <Compile Include="ITripCounterWithMax.cs" />
     <Compile Include="Models\Journey.cs" />
-    <Compile Include="JourneyPlanner.cs" />
+    <Compile Include="RoutesWithinAGivenDistanceFinder.cs" />
+    <Compile Include="ShortestRouteFinder.cs" />
     <Compile Include="Persistence\MapRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RailNetwork.cs" />

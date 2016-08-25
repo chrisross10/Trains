@@ -148,8 +148,8 @@ namespace Trains.App
 				 new DistanceCalculator(repository),
 				 new TripCounterWithMax(repository),
 				 new TripCounterWithExact(repository),
-				 new JourneyPlanner(repository
-					 )
+				 new ShortestRouteFinder(repository),
+				 new RoutesWithinAGivenDistanceFinder(repository)
 				 );
 		}
 

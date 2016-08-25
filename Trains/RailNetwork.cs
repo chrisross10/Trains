@@ -3,16 +3,18 @@
 	public class RailNetwork
 	{
 		private readonly ITripCounterWithMax _tripCounterWithMax;
-		private readonly IJourneyPlanner _journeyPlanner;
-		private readonly IDistanceCalculator _distanceCalculator;
+		private readonly IShortestRouteFinder _shortestRouteFinder;
+	    private readonly IRoutesWithinAGivenDistanceFinder _routesFinder;
+	    private readonly IDistanceCalculator _distanceCalculator;
 		private readonly ITripCounterWithExact _tripCounterWithExact;
 
-		public RailNetwork(IDistanceCalculator distanceCalculator, ITripCounterWithMax tripCounterWithMax, ITripCounterWithExact tripCounterWithExact, IJourneyPlanner journeyPlanner)
+		public RailNetwork(IDistanceCalculator distanceCalculator, ITripCounterWithMax tripCounterWithMax, ITripCounterWithExact tripCounterWithExact, IShortestRouteFinder shortestRouteFinder,IRoutesWithinAGivenDistanceFinder routesFinder)
 		{
 			_distanceCalculator = distanceCalculator;
 			_tripCounterWithMax = tripCounterWithMax;
-			_journeyPlanner = journeyPlanner;
-			_tripCounterWithExact = tripCounterWithExact;
+			_shortestRouteFinder = shortestRouteFinder;
+		    _routesFinder = routesFinder;
+		    _tripCounterWithExact = tripCounterWithExact;
 		}
 
 		public ITravelResult Travel(string journey)
@@ -32,12 +34,12 @@
 
 		public ITravelResult Shortest(string journey)
 		{
-			return _journeyPlanner.Shortest(new TravelQuery(journey));
+			return _shortestRouteFinder.Shortest(new TravelQuery(journey));
 		}
 
 		public int AllRoutesWithin(string journey)
 		{
-			return _journeyPlanner.AllRoutesWithin(new DistanceQuery(journey));
+			return _routesFinder.AllRoutesWithin(new DistanceQuery(journey));
 		}
 	}
 }

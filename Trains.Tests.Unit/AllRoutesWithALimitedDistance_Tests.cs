@@ -7,7 +7,7 @@ namespace Trains.Tests.Unit
 	[TestFixture]
 	public class AllRoutesWithALimitedDistance_Tests
 	{
-		private JourneyPlanner _planner;
+		private RoutesWithinAGivenDistanceFinder _planner;
 
 		[SetUp]
 		public void SetUp()
@@ -26,7 +26,7 @@ namespace Trains.Tests.Unit
 					new Route("E","B",Distance.FromMiles(3)),
 				};
 			mapRepository.Map().Returns(map);
-			_planner = new JourneyPlanner(mapRepository);
+			_planner = new RoutesWithinAGivenDistanceFinder(mapRepository);
 		}
 
 		[TestCase("CC30", ExpectedResult = 7)]
