@@ -7,12 +7,12 @@ This application is written in C# .NET and it's used to calculate distances and 
 ### Make sure you have MSBuild installed.
 
 ## Windows
-If you are using a Windows machine, make sure you have the latest version of .NET installed first.
-MSBuild comes out of the box with .NET.
++ If you are using a Windows machine, make sure you have .NET 4.5.2 or higher [installed](https://www.microsoft.com/en-gb/download/details.aspx?id=48130) first.
+
++ MSBuild comes out of the box with .NET.
 
 ## Mac/Linux
-Please refer to the official Github repository for installation instructions on various platforms.
-https://github.com/Microsoft/msbuild.
++ Please refer to the official Github repository for installation [instructions](https://github.com/Microsoft/msbuild) on various platforms.
 
 ## Assumptions
 
@@ -28,17 +28,19 @@ https://github.com/Microsoft/msbuild.
 
 ## Run the application
 
-1. Unzip the contents of TrainsCSharpCR
+1. Locate the MSBuild executable (eg. C:\Windows\Microsoft.NET\Framework64\v4.0.30319\MSBuild.exe) and remember the path
 
-2. Open up your preferred terminal and browse to TrainsCSharpCR
+2. Unzip the contents of TrainsCSharpCR
 
-3. Build the solution by running the follwing command:
+3. Open up your preferred terminal and browse to TrainsCSharpCR
 
-    ```MSBuild.exe Trains.sln /t:Rebuild```
+4. Build the solution by running the follwing command:
+
+    ```C:\Windows\Microsoft.NET\...\MSBuild.exe Trains.sln /t:Rebuild```
     
-4. ```cd Trains.Console/bin/Debug```
+5. ```cd Trains.Console/bin/Debug```
 
-5. You can then run the executable, ```Trains.App.exe``` with the following syntax:
+6. You can then run the executable, ```Trains.App.exe``` with the following syntax:
 
     ```Trains.App.exe [FILEPATH] [COMMAND] [QUERY]```
     
