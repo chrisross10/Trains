@@ -50,18 +50,30 @@ You can point the application to any other data file by specifying it in the com
 
 There are 6 commands:
 
-* -d   Distance between given stops
+* ```-d```   Distance between given stops
+
      Eg. ```Trains.App.exe [FILEPATH] -d ABC```
-* -h   Help menu
+     
+* ```-h```   Help menu
+
      Eg. ```Trains.App.exe -h```
-* -s   Length of the shortest route between two given stops
+     
+* ```-s```   Length of the shortest route between two given stops
+
      Eg. ```Trains.App.exe [FILEPATH] -s AC```
-* -n   Number of different routes between two given stops under a certain distance
+     
+* ```-n```   Number of different routes between two given stops under a certain distance
+
      Eg. ```Trains.App.exe [FILEPATH] -n CC30```
-* -te  Exact number of trips between two given stops
+     
+* ```-te```  Exact number of trips between two given stops
+
      Eg. ```Trains.App.exe [FILEPATH] -te AC4```
-* -tm  Max number of trips between two given stops
+     
+* ```-tm```  Max number of trips between two given stops
+
      Eg. ```Trains.App.exe [FILEPATH] -tm CC3```
+     
      
 The application exits immediately after displaying the result.
 
