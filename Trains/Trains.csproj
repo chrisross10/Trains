@@ -40,27 +40,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IRoutesWithinAGivenDistanceFinder.cs" />
-    <Compile Include="ITripCounterWithExact.cs" />
+    <Compile Include="Algorithms\IRoutesWithinAGivenDistanceFinder.cs" />
+    <Compile Include="Algorithms\ITripCounterWithExact.cs" />
     <Compile Include="Models\FlatRoute.cs" />
     <Compile Include="Models\Distance.cs" />
-    <Compile Include="IShortestRouteFinder.cs" />
+    <Compile Include="Algorithms\IShortestRouteFinder.cs" />
     <Compile Include="Models\DistanceQuery.cs" />
     <Compile Include="Models\NullTravelResult.cs" />
     <Compile Include="Models\TripsQuery.cs" />
     <Compile Include="Persistence\IMapRepository.cs" />
-    <Compile Include="IDistanceCalculator.cs" />
-    <Compile Include="ITripCounterWithMax.cs" />
+    <Compile Include="Algorithms\IDistanceCalculator.cs" />
+    <Compile Include="Algorithms\ITripCounterWithMax.cs" />
     <Compile Include="Models\Journey.cs" />
-    <Compile Include="RoutesWithinAGivenDistanceFinder.cs" />
-    <Compile Include="ShortestRouteFinder.cs" />
+    <Compile Include="Algorithms\RoutesWithinAGivenDistanceFinder.cs" />
+    <Compile Include="Algorithms\ShortestRouteFinder.cs" />
     <Compile Include="Persistence\MapRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RailNetwork.cs" />
-    <Compile Include="DistanceCalculator.cs" />
+    <Compile Include="Algorithms\DistanceCalculator.cs" />
     <Compile Include="Models\Route.cs" />
-    <Compile Include="TripCounterWithExact.cs" />
-    <Compile Include="TripCounterWithMax.cs" />
+    <Compile Include="Algorithms\TripCounterWithExact.cs" />
+    <Compile Include="Algorithms\TripCounterWithMax.cs" />
     <Compile Include="Models\TravelResult.cs" />
     <Compile Include="Models\TravelQuery.cs" />
   </ItemGroup>
