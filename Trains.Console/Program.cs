@@ -51,11 +51,11 @@ namespace Trains.App
 			Console.WriteLine();
 			Console.WriteLine("HELP MENU");
 			Console.WriteLine("---------------------------------------");
-			Console.WriteLine("Trains.App.exe [FILEPATH] [COMMAND] [QUERY]");
+			Console.WriteLine("syntax: Trains.App.exe [FILEPATH] [COMMAND] [QUERY]");
 			Console.WriteLine("---------------------------------------");
 			Console.WriteLine("Here are the list of possible commands:");
 			Console.WriteLine();
-			Console.WriteLine("-d   Distance between two given stops");
+			Console.WriteLine("-d   Distance between given stops");
 			Console.WriteLine("-h   Help menu");
 			Console.WriteLine("-s   Length of the shortest route between two given stops");
 			Console.WriteLine("-n   Number of different routes between two given stops under a certain distance");
