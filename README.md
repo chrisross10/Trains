@@ -16,7 +16,7 @@ https://github.com/Microsoft/msbuild.
 
 ## Assumptions
 
-+ The data or rail network map consists of routes: ```[StationFrom][StationTo][DistanceBetween]```, eg ```AB5```.
++ The data or rail network map consists of routes: ```[StationFrom][StationTo][DistanceBetween]```, eg ```AB5```
 
 + Each route must be comma seperated ```AB5, BC4```
 
@@ -24,7 +24,7 @@ https://github.com/Microsoft/msbuild.
 
 + The distance may be of any integer size greater than ZERO
 
-+ The application treats the unit of distance as *miles*
++ The application treats the unit of distance as *miles*. This is to help prevent connascence of meaning. I.e. to reduce the coupling between the application knowing that an ```int``` represents some unit fo distance
 
 ## Run the application
 
