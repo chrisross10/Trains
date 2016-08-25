@@ -28,23 +28,31 @@ https://github.com/Microsoft/msbuild.
 
 ## Run the application
 
-1. Unzip the contents of TrainsCSharpCR.
-2. Open up your preferred terminal and browse to TrainsCSharpCR.
+1. Unzip the contents of TrainsCSharpCR
+
+2. Open up your preferred terminal and browse to TrainsCSharpCR
+
 3. Build the solution by running the follwing command:
+
     ```MSBuild.exe Trains.sln /t:Rebuild```
+    
 4. ```cd Trains.Console/bin/Debug```
+
 5. You can then run the executable, ```Trains.App.exe``` with the following syntax:
+
     ```Trains.App.exe [FILEPATH] [COMMAND] [QUERY]```
     
     For example, to find the distance of the route A-B-C:
+    
     ```Trains.App.exe ../../../Graph.txt -d ABC```
     
     If you need to bring up the help menu:
+    
     ```Trains.App.exe -h```
 
 ## Data text file
 
-You can point the application to any other data file by specifying it in the command line
+You can point the application to any other data file by specifying the relative or full path in the command line
 
 ## Commands
 
@@ -52,27 +60,27 @@ There are 6 commands:
 
 * ```-d```   Distance between given stops
 
-     Eg. ```Trains.App.exe [FILEPATH] -d ABC```
+     ```Trains.App.exe [FILEPATH] -d ABC```
      
 * ```-h```   Help menu
 
-     Eg. ```Trains.App.exe -h```
+     ```Trains.App.exe -h```
      
 * ```-s```   Length of the shortest route between two given stops
 
-     Eg. ```Trains.App.exe [FILEPATH] -s AC```
+     ```Trains.App.exe [FILEPATH] -s AC```
      
 * ```-n```   Number of different routes between two given stops under a certain distance
 
-     Eg. ```Trains.App.exe [FILEPATH] -n CC30```
+     ```Trains.App.exe [FILEPATH] -n CC30```
      
 * ```-te```  Exact number of trips between two given stops
 
-     Eg. ```Trains.App.exe [FILEPATH] -te AC4```
+     ```Trains.App.exe [FILEPATH] -te AC4```
      
 * ```-tm```  Max number of trips between two given stops
 
-     Eg. ```Trains.App.exe [FILEPATH] -tm CC3```
+     ```Trains.App.exe [FILEPATH] -tm CC3```
      
      
 The application exits immediately after displaying the result.
@@ -81,13 +89,13 @@ The application exits immediately after displaying the result.
 
 The queries vary depending on which command you choose:
 
-+ ```-d```     This needs to display the entire route and have a minimum of two stations. Eg ```AB``` or ```ABCDE```.
++ ```-d```     This needs to display the entire route and have a minimum of two stations ```AB``` or ```ABCDE```
 
-+ ```-s```     This must contain only two stations. Eg ```AC``` or ```BD```.
++ ```-s```     This must contain only two stations ```AC``` or ```BD```
 
-+ ```-n```     This must contain two stations and an integer representing the maximum distance between the two stations. Eg. ```CC30``` or ```AE20```.
++ ```-n```     This must contain two stations and an integer representing the maximum distance between the two stations ```CC30``` or ```AE20```
 
-+ ```-te```    This must contain two stations and an integer representing the exact number of trips between the two stations. Eg. ```AC4``` or ```BD10```
++ ```-te```    This must contain two stations and an integer representing the exact number of trips between the two stations ```AC4``` or ```BD10```
 
-+ ```-tm```    This must contain two stations and an integer representing the maximum number of trips between the two stations. Eg. ```CC3``` or ```CE15```
++ ```-tm```    This must contain two stations and an integer representing the maximum number of trips between the two stations ```CC3``` or ```CE15```
 
