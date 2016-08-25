@@ -16,15 +16,15 @@ https://github.com/Microsoft/msbuild.
 
 ## Assumptions
 
-+ The data or rail network map consists of routes: [StationFrom][StationTo][DistanceBetween], eg AB5.
++ The data or rail network map consists of routes: ```[StationFrom][StationTo][DistanceBetween]```, ```AB5```.
 
-+ Each route must be comma seperated.
++ Each route must be comma seperated, ```AB5, BC4```
 
-+ The station names must only be one alpha-character, [a-zA-Z].
++ The station names must only be one alpha-character, ```[a-zA-Z]```
 
-+ The distance may be of any integer size greater than ZERO.
++ The distance may be of any integer size greater than ZERO
 
-+ The application treats the unit of distance as *miles*.
++ The application treats the unit of distance as *miles*
 
 ## Run the application
 
