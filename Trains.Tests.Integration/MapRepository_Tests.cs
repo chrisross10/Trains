@@ -55,7 +55,7 @@ namespace Trains.Tests.Integration
 
 		private int GetRandomDistance()
 		{
-			return new Random().Next(1, 9);
+			return new Random().Next(1, 9999);
 		}
 
 		private string GetRandomStation()
