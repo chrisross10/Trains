@@ -24,7 +24,7 @@ This application is written in C# .NET and it's used to calculate distances and 
 
 + The distance may be of any integer size greater than ZERO
 
-+ The application treats the unit of distance as *miles*. This is to help prevent connascence of meaning. I.e. to reduce the coupling between the application knowing that an ```int``` represents some unit fo distance
++ The application treats the unit of distance as *miles*. This is to help prevent connascence of meaning. I.e. to reduce the coupling between the application knowing that an ```int``` represents some unit of distance
 
 ## Run the application
 
