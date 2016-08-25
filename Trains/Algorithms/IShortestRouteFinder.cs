@@ -2,6 +2,6 @@ namespace Trains
 {
     public interface IShortestRouteFinder
     {
-		ITravelResult Shortest(IStationsQuery query);
+        FlatRoute Shortest(IStationsQuery query);
     }
 }

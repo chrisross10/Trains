@@ -12,7 +12,7 @@ namespace Trains
             _repository = repository;
         }
 
-        public ITravelResult Shortest(IStationsQuery query)
+        public FlatRoute Shortest(IStationsQuery query)
         {
             var allRoutes = new List<FlatRoute>();
             var currentRoute = new Journey();
@@ -20,10 +20,11 @@ namespace Trains
             var possibleRoutes = AllRoutes(query.Start, query.End, ref allRoutes, ref currentRoute);
             if (possibleRoutes.Count > 0)
             {
-                var shortestDistance = possibleRoutes.OrderBy(r => r.Distance.Miles).First().Distance;
-                return new TravelResult(shortestDistance);
+                var shortest = possibleRoutes.OrderBy(r => r.Distance.Miles).First();
+                return new FlatRoute(shortest.Route, shortest.Distance);
             }
-            return new NullTravelResult();
+            var route = string.Format("{0}{1}", query.Start, query.End);
+            return new FlatRoute(route);
         }
 
         private List<FlatRoute> AllRoutes(string start, string end, ref List<FlatRoute> allRoutes, ref Journey journey)

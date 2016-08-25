@@ -46,7 +46,6 @@
     <Compile Include="Models\Distance.cs" />
     <Compile Include="Algorithms\IShortestRouteFinder.cs" />
     <Compile Include="Models\DistanceQuery.cs" />
-    <Compile Include="Models\NullTravelResult.cs" />
     <Compile Include="Models\TripsQuery.cs" />
     <Compile Include="Persistence\IMapRepository.cs" />
     <Compile Include="Algorithms\IDistanceCalculator.cs" />
@@ -61,7 +60,6 @@
     <Compile Include="Models\Route.cs" />
     <Compile Include="Algorithms\TripCounterWithExact.cs" />
     <Compile Include="Algorithms\TripCounterWithMax.cs" />
-    <Compile Include="Models\TravelResult.cs" />
     <Compile Include="Models\TravelQuery.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -31,5 +31,10 @@ namespace Trains
         {
             return (int)_miles.GetHashCode();
         }
+
+        public override string ToString()
+        {
+            return _miles > 0 ? _miles.ToString() : "NO SUCH ROUTE";
+        }
     }
 }

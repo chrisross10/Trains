@@ -11,10 +11,10 @@ namespace Trains
             _mapRepository = mapRepository;
         }
 
-        public ITravelResult DistanceTravelled(string journey)
+        public FlatRoute DistanceTravelled(string journey)
         {
             if (string.IsNullOrEmpty(journey))
-                return new NullTravelResult();
+                return new FlatRoute(journey);
 
             var map = _mapRepository.Map();
             var totalDistance = Distance.FromMiles(0);
@@ -27,10 +27,10 @@ namespace Trains
                 }
                 else
                 {
-                    return new NullTravelResult();
+                    return new FlatRoute(journey);
                 }
             }
-            return new TravelResult(totalDistance);
+            return new FlatRoute(journey,totalDistance);
         }
     }
 }

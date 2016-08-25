@@ -17,7 +17,7 @@
 		    _tripCounterWithExact = tripCounterWithExact;
 		}
 
-		public ITravelResult Travel(string journey)
+		public FlatRoute Travel(string journey)
 		{
 			return _distanceCalculator.DistanceTravelled(journey);
 		}
@@ -32,7 +32,7 @@
 			return _tripCounterWithExact.TripsExact(new TripsQuery(journey));
 		}
 
-		public ITravelResult Shortest(string journey)
+		public FlatRoute Shortest(string journey)
 		{
 			return _shortestRouteFinder.Shortest(new TravelQuery(journey));
 		}

@@ -30,6 +30,7 @@ namespace Trains.Tests.Unit
 		}
 
 		[TestCase("CC30", ExpectedResult = 7)]
+		[TestCase("CA30", ExpectedResult = 0)]
 		public int It_finds_all_possible_routes_within_a_given_distance(string journey)
 		{
 			return _planner.AllRoutesWithin(new DistanceQuery(journey));

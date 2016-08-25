@@ -36,7 +36,7 @@ namespace Trains.Tests.Unit
         [TestCase("AED", ExpectedResult = "NO SUCH ROUTE")]
         public string It_calculates_the_distance_of_the_journey(string journey)
         {
-            return _calc.DistanceTravelled(journey).Result;
+            return _calc.DistanceTravelled(journey).Distance.ToString();
         }
     }
 }

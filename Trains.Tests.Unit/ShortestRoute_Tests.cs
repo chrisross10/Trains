@@ -37,7 +37,7 @@ namespace Trains.Tests.Unit
         [TestCase("AB", ExpectedResult = "5")]
 		public string It_finds_shortest_route(string route)
 		{
-			return _planner.Shortest(new TravelQuery(route)).Result;
+			return _planner.Shortest(new TravelQuery(route)).Distance.ToString();
 		}
 	}
 }

@@ -9,7 +9,7 @@ namespace Trains.App
 	{
 		public static void Main(string[] args)
 		{
-			//args = new[] {"../../../Graph.txt", "-s", "AB"};
+			//args = new[] {"../../../Graph.txt", "-d", "AC"};
 
 			if (args == null || (args.Length != 3 && !args.Contains("-h")))
 			{
@@ -116,7 +116,7 @@ namespace Trains.App
 			if (command.Equals("-d"))
 			{
 				var travelResult = railNetwork.Travel(query);
-				Console.WriteLine(travelResult.Result);
+				Console.WriteLine(travelResult.Distance.ToString());
 			}
 			if (command.Equals("-tm"))
 			{
@@ -131,7 +131,7 @@ namespace Trains.App
 			if (command.Equals("-s"))
 			{
 				var travelResult = railNetwork.Shortest(query);
-				Console.WriteLine(travelResult.Result);
+				Console.WriteLine(travelResult.Distance.ToString());
 			}
 			if (command.Equals("-n"))
 			{
