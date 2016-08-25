@@ -7,12 +7,12 @@ namespace Trains.Tests.Unit
     [TestFixture]
     public class StationTracker_NumberOfTripsWithMax_Tests
     {
-        private StationTracker _tracker;
+        private TripCounterWithMax _counter;
 
         [SetUp]
         public void SetUp()
         {
-            var mapRepository = Substitute.For<IMapRepository>();
+            var repository = Substitute.For<IMapRepository>();
             var map = new List<Route>
             {
                 new Route("A","B",Distance.FromMiles(5)),
@@ -25,8 +25,8 @@ namespace Trains.Tests.Unit
                 new Route("D","E",Distance.FromMiles(6)),
                 new Route("E","B",Distance.FromMiles(3)),
             };
-            mapRepository.Map().Returns(map);
-            _tracker = new StationTracker(mapRepository);
+            repository.Map().Returns(map);
+            _counter = new TripCounterWithMax(repository);
         }
 
         [TestCase("CC3", ExpectedResult = 2)]
@@ -37,7 +37,7 @@ namespace Trains.Tests.Unit
         [TestCase("AB5", ExpectedResult = 8)]
         public int It_calculates_the_number_of_trips(string journey)
         {
-            return _tracker.Trips(new TripsQuery(journey));
+            return _counter.Trips(new TripsQuery(journey));
         }
     }
 }

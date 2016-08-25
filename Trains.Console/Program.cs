@@ -17,7 +17,7 @@ namespace Trains.App
 				Environment.Exit(1);
 			}
 
-            // Help menu
+			// Help menu
 			if (args.Contains("-h"))
 			{
 				DisplayHelpMenu();
@@ -39,115 +39,116 @@ namespace Trains.App
 			var query = args[2];
 			ParseQuery(command, query);
 
-		    // Initialise Bootstrap
+			// Initialise Bootstrap
 			var railNetwork = Bootstrap(filePath);
 
-            // Execute
+			// Execute
 			ExecuteCommand(command, railNetwork, query);
 		}
 
-	    private static void DisplayHelpMenu()
-	    {
-	        Console.WriteLine();
-	        Console.WriteLine("HELP MENU");
-	        Console.WriteLine("---------------------------------------");
-	        Console.WriteLine("Trains.App.exe [FILEPATH] [COMMAND] [QUERY]");
-	        Console.WriteLine("---------------------------------------");
-	        Console.WriteLine("Here are the list of possible commands:");
-	        Console.WriteLine();
-	        Console.WriteLine("-d   Distance between two given stops");
-	        Console.WriteLine("-h   Help menu");
-	        Console.WriteLine("-s   Length of the shortest route between two given stops");
-	        Console.WriteLine("-n   Number of different routes between two given stops under a certain distance");
-	        Console.WriteLine("-te  Exact number of trips between two given stops");
-	        Console.WriteLine("-tm  Max number of trips between two given stops");
-	        Console.WriteLine("---------------------------------------");
-
-	        Environment.Exit(0);
-	    }
-
-	    private static void ParseQuery(string command, string query)
-	    {
-	        if (command == "-d")
-	        {
-	            var regex = new Regex(@"^[a-zA-Z]+$");
-	            if (!regex.IsMatch(query))
-	            {
-	                Console.WriteLine("Bad query. It must consist of a start station any number of named stations");
-	                Console.WriteLine("Eg. ABC or ABCDE");
-	                Environment.Exit(1);
-	            }
-	        }
-	        if (command == "-tm" || command == "-te" || command == "-n")
-	        {
-	            var regex = new Regex(@"^[a-zA-Z][a-zA-Z]\d+$");
-	            if (!regex.IsMatch(query))
-	            {
-	                Console.WriteLine(
-	                    "Bad query. It must consist of a start station, end station and a number of trips/distance.");
-	                Console.WriteLine("Eg. CC30 or AB4.");
-	                Environment.Exit(1);
-	            }
-	        }
-	        if (command == "-s")
-	        {
-	            var regex = new Regex(@"^[a-zA-Z][a-zA-Z]$");
-	            if (!regex.IsMatch(query))
-	            {
-	                Console.WriteLine("Bad query. It must consist of a start station and an end station.");
-	                Console.WriteLine("Eg. AC or CC");
-	                Environment.Exit(1);
-	            }
-	        }
-	    }
-
-	    private static void ParseCommand(string command)
-	    {
-            var possibleCommands = new[] { "-d", "-tm", "-te", "-s", "-n" };
-            if (!possibleCommands.Contains(command))
-	        {
-	            Console.WriteLine("Unknown command. Type -h for help menu");
-	            Environment.Exit(1);
-	        }
-	    }
-
-	    private static void ExecuteCommand(string command, RailNetwork railNetwork, string query)
-	    {
-	        if (command.Equals("-d"))
-	        {
-	            var travelResult = railNetwork.Travel(query);
-	            Console.WriteLine(travelResult.Result);
-	        }
-	        if (command.Equals("-tm"))
-	        {
-	            var trips = railNetwork.Trips(query);
-	            Console.WriteLine(trips);
-	        }
-	        if (command.Equals("-te"))
-	        {
-	            var trips = railNetwork.TripsExact(query);
-	            Console.WriteLine(trips);
-	        }
-	        if (command.Equals("-s"))
-	        {
-	            var travelResult = railNetwork.Shortest(query);
-	            Console.WriteLine(travelResult.Result);
-	        }
-	        if (command.Equals("-n"))
-	        {
-	            var numberOfRoutes = railNetwork.AllRoutesWithin(query);
-	            Console.WriteLine(numberOfRoutes);
-	        }
-	        Environment.Exit(0);
-	    }
-
-	    private static RailNetwork Bootstrap(string filePath)
+		private static void DisplayHelpMenu()
 		{
-			var mapRespository = new MapRepository(filePath);
+			Console.WriteLine();
+			Console.WriteLine("HELP MENU");
+			Console.WriteLine("---------------------------------------");
+			Console.WriteLine("Trains.App.exe [FILEPATH] [COMMAND] [QUERY]");
+			Console.WriteLine("---------------------------------------");
+			Console.WriteLine("Here are the list of possible commands:");
+			Console.WriteLine();
+			Console.WriteLine("-d   Distance between two given stops");
+			Console.WriteLine("-h   Help menu");
+			Console.WriteLine("-s   Length of the shortest route between two given stops");
+			Console.WriteLine("-n   Number of different routes between two given stops under a certain distance");
+			Console.WriteLine("-te  Exact number of trips between two given stops");
+			Console.WriteLine("-tm  Max number of trips between two given stops");
+			Console.WriteLine("---------------------------------------");
+
+			Environment.Exit(0);
+		}
+
+		private static void ParseQuery(string command, string query)
+		{
+			if (command == "-d")
+			{
+				var regex = new Regex(@"^[a-zA-Z]+$");
+				if (!regex.IsMatch(query))
+				{
+					Console.WriteLine("Bad query. It must consist of a start station any number of named stations");
+					Console.WriteLine("Eg. ABC or ABCDE");
+					Environment.Exit(1);
+				}
+			}
+			if (command == "-tm" || command == "-te" || command == "-n")
+			{
+				var regex = new Regex(@"^[a-zA-Z][a-zA-Z]\d+$");
+				if (!regex.IsMatch(query))
+				{
+					Console.WriteLine(
+						"Bad query. It must consist of a start station, end station and a number of trips/distance.");
+					Console.WriteLine("Eg. CC30 or AB4.");
+					Environment.Exit(1);
+				}
+			}
+			if (command == "-s")
+			{
+				var regex = new Regex(@"^[a-zA-Z][a-zA-Z]$");
+				if (!regex.IsMatch(query))
+				{
+					Console.WriteLine("Bad query. It must consist of a start station and an end station.");
+					Console.WriteLine("Eg. AC or CC");
+					Environment.Exit(1);
+				}
+			}
+		}
+
+		private static void ParseCommand(string command)
+		{
+			var possibleCommands = new[] { "-d", "-tm", "-te", "-s", "-n" };
+			if (!possibleCommands.Contains(command))
+			{
+				Console.WriteLine("Unknown command. Type -h for help menu");
+				Environment.Exit(1);
+			}
+		}
+
+		private static void ExecuteCommand(string command, RailNetwork railNetwork, string query)
+		{
+			if (command.Equals("-d"))
+			{
+				var travelResult = railNetwork.Travel(query);
+				Console.WriteLine(travelResult.Result);
+			}
+			if (command.Equals("-tm"))
+			{
+				var trips = railNetwork.Trips(query);
+				Console.WriteLine(trips);
+			}
+			if (command.Equals("-te"))
+			{
+				var trips = railNetwork.TripsExact(query);
+				Console.WriteLine(trips);
+			}
+			if (command.Equals("-s"))
+			{
+				var travelResult = railNetwork.Shortest(query);
+				Console.WriteLine(travelResult.Result);
+			}
+			if (command.Equals("-n"))
+			{
+				var numberOfRoutes = railNetwork.AllRoutesWithin(query);
+				Console.WriteLine(numberOfRoutes);
+			}
+			Environment.Exit(0);
+		}
+
+		private static RailNetwork Bootstrap(string filePath)
+		{
+			var repository = new MapRepository(filePath);
 			return new RailNetwork(
-				 new DistanceCalculator(mapRespository),
-				 new StationTracker(mapRespository),
-				 new JourneyPlanner(mapRespository
+				 new DistanceCalculator(repository),
+				 new TripCounterWithMax(repository),
+				 new TripCounterWithExact(repository),
+				 new JourneyPlanner(repository
 					 )
 				 );
 		}

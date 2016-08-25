@@ -7,12 +7,12 @@ namespace Trains.Tests.Unit
     [TestFixture]
     public class StationTracker_ExactNumberOfTrips_Tests
     {
-        private StationTracker _stationTracker;
+		private TripCounterWithExact _counter;
 
         [SetUp]
         public void SetUp()
         {
-            var mapRepository = Substitute.For<IMapRepository>();
+            var repository = Substitute.For<IMapRepository>();
             var map = new List<Route>
             {
                 new Route("A","B",Distance.FromMiles(5)),
@@ -25,8 +25,8 @@ namespace Trains.Tests.Unit
                 new Route("D","E",Distance.FromMiles(6)),
                 new Route("E","B",Distance.FromMiles(3)),
             };
-            mapRepository.Map().Returns(map);
-            _stationTracker = new StationTracker(mapRepository);
+            repository.Map().Returns(map);
+            _counter = new TripCounterWithExact(repository);
         }
 
         [TestCase("AC4", ExpectedResult = 3)]
@@ -34,7 +34,7 @@ namespace Trains.Tests.Unit
         [TestCase("CC4", ExpectedResult = 2)]
         public int It_calculates_the_exact_number_of_trips(string journey)
         {
-            return _stationTracker.TripsExact(new TripsQuery(journey));
+            return _counter.TripsExact(new TripsQuery(journey));
         }
     }
 }

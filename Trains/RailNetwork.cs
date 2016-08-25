@@ -2,15 +2,17 @@
 {
 	public class RailNetwork
 	{
-		private readonly IStationTracker _stationTracker;
+		private readonly ITripCounterWithMax _tripCounterWithMax;
 		private readonly IJourneyPlanner _journeyPlanner;
 		private readonly IDistanceCalculator _distanceCalculator;
+		private readonly ITripCounterWithExact _tripCounterWithExact;
 
-		public RailNetwork(IDistanceCalculator distanceCalculator, IStationTracker stationTracker, IJourneyPlanner journeyPlanner)
+		public RailNetwork(IDistanceCalculator distanceCalculator, ITripCounterWithMax tripCounterWithMax, ITripCounterWithExact tripCounterWithExact, IJourneyPlanner journeyPlanner)
 		{
 			_distanceCalculator = distanceCalculator;
-			_stationTracker = stationTracker;
+			_tripCounterWithMax = tripCounterWithMax;
 			_journeyPlanner = journeyPlanner;
+			_tripCounterWithExact = tripCounterWithExact;
 		}
 
 		public ITravelResult Travel(string journey)
@@ -20,12 +22,12 @@
 
 		public int Trips(string journey)
 		{
-			return _stationTracker.Trips(new TripsQuery(journey));
+			return _tripCounterWithMax.Trips(new TripsQuery(journey));
 		}
 
 		public int TripsExact(string journey)
 		{
-			return _stationTracker.TripsExact(new TripsQuery(journey));
+			return _tripCounterWithExact.TripsExact(new TripsQuery(journey));
 		}
 
 		public ITravelResult Shortest(string journey)
