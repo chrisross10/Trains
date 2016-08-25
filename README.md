@@ -60,10 +60,15 @@ The application exits immediately after displaying the result.
 
 ## Queries
 
-The queries vary depending on which command you choose.
+The queries vary depending on which command you choose:
+
 + -d     This needs to display the entire route and have a minimum of two stations. Eg "AB" or "ABCDE".
+
 + -s     This must contain only two stations. Eg "AC" or "BD".
+
 + -n     This must contain two stations and an integer representing the maximum distance between the two stations. Eg. "CC30" or "AE20".
+
 + -te    This must contain two stations and an integer representing the exact number of trips between the two stations. Eg. "AC4" or "BD10"
+
 + -tm    This must contain two stations and an integer representing the maximum number of trips between the two stations. Eg. "CC3" or "CE15"
 
