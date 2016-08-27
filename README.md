@@ -38,15 +38,15 @@ This application is written in C# .NET and it's used to calculate distances and 
 
 6. You can then run the executable, ```Trains.App.exe``` with the following syntax:
 
-    ```Trains.App.exe [FILEPATH] [COMMAND] [QUERY]```
+    ```mono Trains.App.exe [FILEPATH] [COMMAND] [QUERY]```
     
     For example, to find the distance of the route A-B-C:
     
-    ```Trains.App.exe /src/data/Graph.txt -d ABC```
+    ```mono Trains.App.exe /src/data/Graph.txt -d ABC```
     
     If you need to bring up the help menu:
     
-    ```Trains.App.exe -h```
+    ```mono Trains.App.exe -h```
 
 ## Data text file
 
@@ -58,27 +58,27 @@ There are 6 commands:
 
 * ```-d```   Distance between given stops
 
-     ```Trains.App.exe [FILEPATH] -d ABC```
+     ```mono Trains.App.exe [FILEPATH] -d ABC```
      
 * ```-h```   Help menu
 
-     ```Trains.App.exe -h```
+     ```mono Trains.App.exe -h```
      
 * ```-s```   Length of the shortest route between two given stops
 
-     ```Trains.App.exe [FILEPATH] -s AC```
+     ```mono Trains.App.exe [FILEPATH] -s AC```
      
 * ```-n```   Number of different routes between two given stops under a certain distance
 
-     ```Trains.App.exe [FILEPATH] -n CC30```
+     ```mono Trains.App.exe [FILEPATH] -n CC30```
      
 * ```-te```  Exact number of trips between two given stops
 
-     ```Trains.App.exe [FILEPATH] -te AC4```
+     ```mono Trains.App.exe [FILEPATH] -te AC4```
      
 * ```-tm```  Max number of trips between two given stops
 
-     ```Trains.App.exe [FILEPATH] -tm CC3```
+     ```mono Trains.App.exe [FILEPATH] -tm CC3```
      
      
 The application exits immediately after displaying the result.
