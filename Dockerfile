@@ -5,6 +5,5 @@ RUN curl https://api.nuget.org/downloads/nuget.exe -o nuget.exe
 RUN mono nuget.exe install NUnit
 RUN mono nuget.exe install NUnit.Runners
 
-#RUN xbuild /src/Trains.sln
+RUN xbuild /src/Trains.sln
 
-#WORKDIR /src/Trains.Console/bin/Debug
