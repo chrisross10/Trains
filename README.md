@@ -4,15 +4,11 @@ This application is written in C# .NET and it's used to calculate distances and 
 
 ## Installation Instructions
 
-### Make sure you have MSBuild installed.
+### Prerequisites
 
-## Windows
-+ If you are using a Windows machine, make sure you have .NET 4.5.2 or higher [installed](https://www.microsoft.com/en-gb/download/details.aspx?id=48130) first.
+1. [Docker](https://docs.docker.com/engine/installation/)
 
-+ MSBuild comes out of the box with .NET, so if you already have .NET installed, you won't need to install MSBuild.
-
-## Mac/Linux
-+ Please refer to the official MSBuild Github [repository](https://github.com/Microsoft/msbuild) for installation instructions on various platforms.
+2. Make (Don't worry if you don't have make installed, all the commands are wrapper in ```Makefile``` within the source code)
 
 ## Assumptions
 
@@ -28,17 +24,17 @@ This application is written in C# .NET and it's used to calculate distances and 
 
 ## Run the application
 
-1. Locate the MSBuild executable (eg. C:\Windows\Microsoft.NET\Framework64\v4.0.30319\MSBuild.exe) and remember the path
-
 2. Unzip the contents of TrainsCSharpCR
 
 3. Open up your preferred terminal and browse to TrainsCSharpCR
 
-4. Build the solution by running the follwing command:
+4. Build the docker container and run the tests:
 
-    ```C:\Windows\Microsoft.NET\...\MSBuild.exe Trains.sln /t:Rebuild```
+    ```make```
     
-5. ```cd Trains.Console/bin/Debug```
+5. Once everything's built and the tests have run, open the container:
+
+    ```make open``` OR ```docker run -it trains```
 
 6. You can then run the executable, ```Trains.App.exe``` with the following syntax:
 
@@ -46,7 +42,7 @@ This application is written in C# .NET and it's used to calculate distances and 
     
     For example, to find the distance of the route A-B-C:
     
-    ```Trains.App.exe ../../../Graph.txt -d ABC```
+    ```Trains.App.exe /src/data/Graph.txt -d ABC```
     
     If you need to bring up the help menu:
     
@@ -54,7 +50,7 @@ This application is written in C# .NET and it's used to calculate distances and 
 
 ## Data text file
 
-You can point the application to any other data file by specifying the relative or full path in the command line
+If you want to add another data file, simply place the file into the ```data``` folder, build and run the container again. You can then point the application to that file by specifying the path in the command line
 
 ## Commands
 
@@ -100,4 +96,3 @@ The queries vary depending on which command you choose:
 + ```-te```    This must contain two stations and an integer representing the exact number of trips between the two stations ```AC4``` or ```BD10```
 
 + ```-tm```    This must contain two stations and an integer representing the maximum number of trips between the two stations ```CC3``` or ```CE15```
-
