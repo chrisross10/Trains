@@ -31,22 +31,18 @@ This application is written in C# .NET and it's used to calculate distances and 
 4. Build the docker container and run the tests:
 
     ```make```
-    
-5. Once everything's built and the tests have run, open the container:
 
-    ```make open``` OR ```docker run -it trains```
+5. You can then run the executable, ```Trains.App.exe``` with the following syntax:
 
-6. You can then run the executable, ```Trains.App.exe``` with the following syntax:
-
-    ```mono Trains.App.exe [FILEPATH] [COMMAND] [QUERY]```
+    ```docker run trains mono Trains.App.exe [FILEPATH] [COMMAND] [QUERY]```
     
     For example, to find the distance of the route A-B-C:
     
-    ```mono Trains.App.exe /src/data/Graph.txt -d ABC```
+    ```docker run trains mono Trains.App.exe /src/data/Graph.txt -d ABC```
     
     If you need to bring up the help menu:
     
-    ```mono Trains.App.exe -h```
+    ```docker run trains mono Trains.App.exe -h```
 
 ## Data text file
 
@@ -58,27 +54,27 @@ There are 6 commands:
 
 * ```-d```   Distance between given stops
 
-     ```mono Trains.App.exe [FILEPATH] -d ABC```
+     ```docker run trains mono Trains.App.exe [FILEPATH] -d ABC```
      
 * ```-h```   Help menu
 
-     ```mono Trains.App.exe -h```
+     ```docker run trains mono Trains.App.exe -h```
      
 * ```-s```   Length of the shortest route between two given stops
 
-     ```mono Trains.App.exe [FILEPATH] -s AC```
+     ```docker run trains mono Trains.App.exe [FILEPATH] -s AC```
      
 * ```-n```   Number of different routes between two given stops under a certain distance
 
-     ```mono Trains.App.exe [FILEPATH] -n CC30```
+     ```docker run trains mono Trains.App.exe [FILEPATH] -n CC30```
      
 * ```-te```  Exact number of trips between two given stops
 
-     ```mono Trains.App.exe [FILEPATH] -te AC4```
+     ```docker run trains mono Trains.App.exe [FILEPATH] -te AC4```
      
 * ```-tm```  Max number of trips between two given stops
 
-     ```mono Trains.App.exe [FILEPATH] -tm CC3```
+     ```docker run trains mono Trains.App.exe [FILEPATH] -tm CC3```
      
      
 The application exits immediately after displaying the result.
