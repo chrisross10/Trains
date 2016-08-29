@@ -6,9 +6,9 @@ This application is written in C# .NET v4.5.2 and it's used to calculate distanc
 
 ### Prerequisites
 
-1. [Docker](https://docs.docker.com/engine/installation/)
+1. [Docker](https://docs.docker.com/engine/installation/). Please make sure the Docker daemon is running before you continue.
 
-2. Make (Don't worry if you don't have make installed, all the commands are wrapper in ```Makefile``` within the source code)
+2. Make (Don't worry if you don't have make installed, all the commands are wrapper in ```Makefile``` within the source code). Open ```Makefile``` to view the commands.
 
 ## Assumptions
 
