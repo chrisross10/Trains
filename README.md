@@ -1,6 +1,6 @@
 # Trains
 
-This application is written in C# .NET and it's used to calculate distances and routes within a rail network (graph database).
+This application is written in C# .NET v4.5.2 and it's used to calculate distances and routes within a rail network (graph database).
 
 ## Installation Instructions
 
@@ -20,29 +20,34 @@ This application is written in C# .NET and it's used to calculate distances and 
 
 + The distance may be of any integer size greater than ZERO
 
-+ The application treats the unit of distance as *miles*. This is to help prevent connascence of meaning. I.e. to reduce the coupling between the application knowing that an ```int``` represents some unit of distance
++ The application treats the unit of distance as *miles*. This is to help prevent connascence of meaning. I.e. to prevent the coupling between the application knowing that an ```int``` represents some unit of distance
 
 ## Run the application
 
-2. Unzip the contents of TrainsCSharpCR
+1. Unzip the contents of TrainsCSharpCR
 
-3. Open up your preferred terminal and browse to TrainsCSharpCR
+2. Open up your preferred terminal and browse to TrainsCSharpCR
 
-4. Build the docker container and run the tests:
+3. Build the docker container and run the tests:
 
     ```make```
 
-5. You can then run the executable, ```Trains.App.exe``` with the following syntax:
+4. You can then run the executable, ```Trains.App.exe``` with the following syntax:
 
     ```docker run trains mono Trains.App.exe [FILEPATH] [COMMAND] [QUERY]```
     
+    ###NB. the filepath, in the above command, is relative to the entry point within the Docker container. Dockerfile adds everything within TrainsCSharpCR to /src, therefore Graph.txt can be located within the Docker container at /src/data/Graph.txt###
+    
     For example, to find the distance of the route A-B-C:
     
-    ```docker run trains mono Trains.App.exe /src/data/Graph.txt -d ABC```
+    ```docker run trains mono Trains.App.exe /src/data/Graph.txt -d ABC``` (copy this exact command)
     
     If you need to bring up the help menu:
     
     ```docker run trains mono Trains.App.exe -h```
+    
+    ###```docker run trains``` will open and run the Docker container tagged 'trains'###
+    
 
 ## Data text file
 
