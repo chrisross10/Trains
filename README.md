@@ -28,9 +28,7 @@ This application is written in C# .NET v4.5.2 and it's used to calculate distanc
 
 2. Open up your preferred terminal and browse to TrainsCSharpCR
 
-3. Build the docker container and run the tests:
-
-    ```make```
+3. Build the docker container and run the tests: ```make```
 
 4. You can then run the executable, ```Trains.App.exe``` with the following syntax:
 
